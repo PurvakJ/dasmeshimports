@@ -11971,6 +11971,100 @@ showNotification(`${product.name} added to cart!`, 'success');
 showNotification(`${product.name} quantity updated to ${cartItems[existingIndex].quantity}!`, 'success');
 // With:
 showNotification(`${product.name} quantity updated!`, 'success');
+
+// Add this at the top after checkAuth()
+function loadCartFromStorage() {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+        cartItems = JSON.parse(savedCart);
+        updateCartCount();
+    }
+}
+
+// Update addToCart functions to save to storage
+function addToCart(productData, btn) {
+    // ... existing code ...
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+function updateQuantity(index, change) {
+    // ... existing code ...
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+function removeFromCart(index) {
+    // ... existing code ...
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+function clearCart() {
+    // ... existing code ...
+    localStorage.setItem('cart', JSON.stringify([]));
+}
+
+// Fix showPage - remove duplicate and use correct variable names
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    closeMobileMenu();
+    
+    switch(pageId) {
+        case 'cartPage':
+            if (!user) {
+                showLoginRequired('cartPage');
+            } else {
+                renderCart();
+            }
+            break;
+        case 'ordersPage':
+            if (!user) {
+                showLoginRequired('ordersPage');
+            } else {
+                loadUserOrders();
+            }
+            break;
+        case 'admin':
+            if (role !== 'admin') {
+                showPage('home');
+                return;
+            }
+            loadAdminOrders();
+            break;
+        case 'products':
+            renderAllProductsGrid2();  // Fix: use correct function name
+            populateCategoryDropdown();
+            break;
+        case 'home':
+            renderFeaturedProducts();
+            break;
+    }
+}
+
+// Update renderFeaturedProducts to use correct card creator
+function renderFeaturedProducts() {
+    const container = document.getElementById('featuredProducts');
+    if (!container) return;
+    
+    const featured = allProducts.slice(0, 8);
+    
+    if (featured.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--gray);">No products available</p>';
+        return;
+    }
+    
+    container.innerHTML = featured.map(product => createProductCardGrid2(product)).join('');
+}
+
+// Add event listener for cart persistence
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    loadCartFromStorage();
+});
+
+// Remove duplicate functions (delete the second definitions of closeMobileMenu, toggleMobileMenu)
     </script>
 </body>
 </html>
