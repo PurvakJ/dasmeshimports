@@ -7861,7 +7861,7 @@ html {
 <body>
     <header>
         <div class="header-container">
-            <button class="hamburger" onclick="toggleMobileMenu()" id="hamburgerBtn">
+            <button class="hamburger" id="hamburgerBtn">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -7878,56 +7878,56 @@ html {
             </div>
             
             <div class="nav-buttons">
-                <button class="nav-btn" onclick="showPage('home')">
+                <button class="nav-btn" data-page="home">
                     <i class="fas fa-home"></i> Home
                 </button>
-                <button class="nav-btn" onclick="showPage('products')">
+                <button class="nav-btn" data-page="products">
                     <i class="fas fa-store"></i> Shop
                 </button>
-                <button class="nav-btn" onclick="showPage('cartPage')">
+                <button class="nav-btn" data-page="cartPage">
                     <i class="fas fa-shopping-cart"></i> Cart
                     <span id="cartCount" class="cart-count">0</span>
                 </button>
-                <button class="nav-btn" onclick="showPage('ordersPage')" id="ordersBtn">
+                <button class="nav-btn" data-page="ordersPage" id="ordersBtn">
                     <i class="fas fa-box"></i> My Orders
                 </button>
-                <button class="nav-btn" onclick="toggleAuthModal()" id="authBtn">
+                <button class="nav-btn" id="authBtn">
                     <i class="fas fa-user"></i> Login
                 </button>
-                <button class="nav-btn" onclick="showPage('admin')" id="adminBtn" style="display: none">
+                <button class="nav-btn" data-page="admin" id="adminBtn" style="display: none">
                     <i class="fas fa-cog"></i> Admin
                 </button>
             </div>
         </div>
     </header>
-
+    
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-user-info" id="mobileUserInfo" style="display: none;">
             <div class="mobile-user-email" id="mobileUserEmail"></div>
             <span class="mobile-user-role" id="mobileUserRole"></span>
         </div>
-
-        <button class="mobile-nav-btn" onclick="showPage('home'); toggleMobileMenu();">
+        <button class="mobile-nav-btn" data-page="home">
             <i class="fas fa-home"></i> Home
         </button>
-        <button class="mobile-nav-btn" onclick="showPage('products'); toggleMobileMenu();">
+        <button class="mobile-nav-btn" data-page="products">
             <i class="fas fa-store"></i> Shop
         </button>
-        <button class="mobile-nav-btn" onclick="showPage('cartPage'); toggleMobileMenu();">
+        <button class="mobile-nav-btn" data-page="cartPage">
             <i class="fas fa-shopping-cart"></i> Cart
             <span id="mobileCartCount" class="mobile-cart-count">0</span>
         </button>
-        <button class="mobile-nav-btn" onclick="showPage('ordersPage'); toggleMobileMenu();" id="mobileOrdersBtn">
+        <button class="mobile-nav-btn" data-page="ordersPage" id="mobileOrdersBtn">
             <i class="fas fa-box"></i> My Orders
         </button>
-        <button class="mobile-nav-btn" onclick="toggleAuthModal(); toggleMobileMenu();" id="mobileAuthBtn">
+        <button class="mobile-nav-btn" id="mobileAuthBtn">
             <i class="fas fa-user"></i> Login
         </button>
-        <button class="mobile-nav-btn" onclick="showPage('admin'); toggleMobileMenu();" id="mobileAdminBtn" style="display: none">
+        <button class="mobile-nav-btn" data-page="admin" id="mobileAdminBtn" style="display: none">
             <i class="fas fa-cog"></i> Admin
         </button>
     </div>
+
 
     <div class="container">
         <div id="home" class="page active">
@@ -10953,6 +10953,141 @@ html {
                 }
             });
         });
+
+        // ==================== FIXED MOBILE NAVIGATION ====================
+
+// Close mobile menu function
+function closeMobileMenu() {
+    const mobileNav = document.getElementById('mobileNav');
+    const hamburger = document.getElementById('hamburgerBtn');
+    if (mobileNav) mobileNav.classList.remove('active');
+    if (hamburger) {
+        const spans = hamburger.querySelectorAll('span');
+        if (spans.length) {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    }
+}
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+    const mobileNav = document.getElementById('mobileNav');
+    const hamburger = document.getElementById('hamburgerBtn');
+    if (!mobileNav) return;
+    
+    if (mobileNav.classList.contains('active')) {
+        mobileNav.classList.remove('active');
+        if (hamburger) {
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    } else {
+        mobileNav.classList.add('active');
+        if (hamburger) {
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        }
+    }
+}
+
+// Main showPage function with scroll to top AND close mobile menu
+function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // Show selected page
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    
+    // Close mobile menu when navigating
+    closeMobileMenu();
+    
+    // Refresh page specific content
+    if (pageId === 'cartPage' && typeof renderCart === 'function') renderCart();
+    else if (pageId === 'ordersPage' && currentUser && typeof loadUserOrders === 'function') loadUserOrders();
+    else if (pageId === 'products' && typeof renderAllProducts === 'function') renderAllProducts();
+    else if (pageId === 'home' && typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
+    else if (pageId === 'admin' && userRole === 'admin' && typeof loadAdminOrders === 'function') loadAdminOrders();
+}
+
+// Initialize navigation
+function initNavigation() {
+    // Hamburger button
+    const hamburger = document.getElementById('hamburgerBtn');
+    if (hamburger) {
+        hamburger.removeEventListener('click', toggleMobileMenu);
+        hamburger.addEventListener('click', toggleMobileMenu);
+    }
+    
+    // All buttons with data-page attribute
+    document.querySelectorAll('[data-page]').forEach(btn => {
+        btn.removeEventListener('click', handleNavClick);
+        btn.addEventListener('click', handleNavClick);
+    });
+    
+    // Auth buttons
+    const authBtn = document.getElementById('authBtn');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    if (authBtn) {
+        authBtn.removeEventListener('click', handleAuthClick);
+        authBtn.addEventListener('click', handleAuthClick);
+    }
+    if (mobileAuthBtn) {
+        mobileAuthBtn.removeEventListener('click', handleMobileAuthClick);
+        mobileAuthBtn.addEventListener('click', handleMobileAuthClick);
+    }
+}
+
+function handleNavClick(e) {
+    e.preventDefault();
+    const pageId = this.getAttribute('data-page');
+    if (pageId) showPage(pageId);
+}
+
+function handleAuthClick(e) {
+    e.preventDefault();
+    if (currentUser) logout();
+    else openAuthModal();
+    closeMobileMenu();
+}
+
+function handleMobileAuthClick(e) {
+    e.preventDefault();
+    if (currentUser) logout();
+    else { openAuthModal(); closeMobileMenu(); }
+    closeMobileMenu();
+}
+
+function openAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (modal) modal.style.display = 'none';
+    closeMobileMenu();
+}
+
+// Run on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavigation);
+} else {
+    initNavigation();
+}
     </script>
 </body>
 </html>
