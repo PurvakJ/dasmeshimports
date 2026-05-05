@@ -7855,6 +7855,584 @@ html {
 }
 
 
+/* Container Showcase - 2 in a row on mobile */
+.container-showcase {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.container-card {
+    flex: 1;
+    min-width: 250px;
+    background: #FFFFFF;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-align: center;
+}
+
+/* Mobile: 2 cards in a row */
+@media (max-width: 768px) {
+    .container-showcase {
+        gap: 1rem;
+        padding: 0 15px;
+    }
+    
+    .container-card {
+        flex: 0 0 calc(50% - 0.5rem);
+        min-width: unset;
+        max-width: calc(50% - 0.5rem);
+    }
+    
+    .container-card img {
+        height: 150px;
+        object-fit: cover;
+    }
+    
+    .container-card h3 {
+        font-size: 0.9rem;
+        margin: 0.75rem 0 0.25rem;
+    }
+    
+    .container-card p {
+        font-size: 0.7rem;
+        padding: 0 0.5rem 1rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .container-showcase {
+        gap: 0.75rem;
+        padding: 0 10px;
+    }
+    
+    .container-card {
+        flex: 0 0 calc(50% - 0.375rem);
+        max-width: calc(50% - 0.375rem);
+    }
+    
+    .container-card img {
+        height: 120px;
+    }
+    
+    .container-card h3 {
+        font-size: 0.8rem;
+    }
+    
+    .container-card p {
+        font-size: 0.65rem;
+        padding: 0 0.5rem 0.75rem;
+    }
+}
+
+
+/* Products Grid 1 - Featured Products */
+.products-grid1 {
+    display: grid;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Desktop: 4 in a row */
+@media (min-width: 1200px) {
+    .products-grid1 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Tablet: 3 in a row */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .products-grid1 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile: 2 in a row */
+@media (max-width: 768px) {
+    .products-grid1 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+}
+
+/* Small mobile: keep 2 in a row but adjust card size */
+@media (max-width: 480px) {
+    .products-grid1 {
+        gap: 0.75rem;
+        padding: 0 0.75rem;
+    }
+}
+
+/* Card styling for products-grid1 (same as your existing product cards) */
+.products-grid1 .product-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.products-grid1 .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.products-grid1 .product-img {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-color: #F5F0E8;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.products-grid1 .product-info {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.products-grid1 .product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+}
+
+.products-grid1 .product-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+.products-grid1 .product-desc {
+    font-size: 0.75rem;
+    color: var(--dark-light);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.products-grid1 .btn-add-to-cart {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.products-grid1 .btn-add-to-cart:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Adjust image height for different screen sizes */
+@media (max-width: 768px) {
+    .products-grid1 .product-img {
+        height: 160px;
+    }
+    
+    .products-grid1 .product-name {
+        font-size: 0.85rem;
+    }
+    
+    .products-grid1 .product-price {
+        font-size: 1rem;
+    }
+    
+    .products-grid1 .product-info {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid1 .product-img {
+        height: 140px;
+    }
+    
+    .products-grid1 .product-name {
+        font-size: 0.8rem;
+    }
+    
+    .products-grid1 .product-price {
+        font-size: 0.9rem;
+    }
+    
+    .products-grid1 .btn-add-to-cart {
+        padding: 6px 8px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Category Filter Wrapper - Dropdown Style */
+.category-filter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    max-width: 1400px;
+    margin: 0 auto 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.filter-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-label i {
+    color: var(--primary);
+}
+
+.category-dropdown {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--dark);
+    background: white;
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 180px;
+}
+
+.category-dropdown:hover {
+    border-color: var(--primary);
+}
+
+.category-dropdown:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+/* Products Grid 2 - Responsive (4, 3, 2) */
+.products-grid2 {
+    display: grid;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Desktop: 4 in a row */
+@media (min-width: 1200px) {
+    .products-grid2 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Tablet: 3 in a row */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .products-grid2 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile: 2 in a row */
+@media (max-width: 768px) {
+    .products-grid2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .category-filter-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .category-dropdown {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+    .products-grid2 {
+        gap: 0.75rem;
+        padding: 0 0.75rem;
+    }
+}
+
+/* Card styling for products-grid2 */
+.products-grid2 .product-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.products-grid2 .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.products-grid2 .product-img {
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+    background-color: #F5F0E8;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.products-grid2 .product-info {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.products-grid2 .product-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+}
+
+.products-grid2 .product-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+.products-grid2 .product-desc {
+    font-size: 0.8rem;
+    color: var(--dark-light);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.products-grid2 .btn-add-to-cart {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.products-grid2 .btn-add-to-cart:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Adjust image height for tablet */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .products-grid2 .product-img {
+        height: 200px;
+    }
+    
+    .products-grid2 .product-name {
+        font-size: 1rem;
+    }
+    
+    .products-grid2 .product-price {
+        font-size: 1.1rem;
+    }
+}
+
+/* Adjust image height for mobile */
+@media (max-width: 768px) {
+    .products-grid2 .product-img {
+        height: 160px;
+    }
+    
+    .products-grid2 .product-name {
+        font-size: 0.85rem;
+    }
+    
+    .products-grid2 .product-price {
+        font-size: 1rem;
+    }
+    
+    .products-grid2 .product-info {
+        padding: 0.75rem;
+    }
+    
+    .products-grid2 .btn-add-to-cart {
+        padding: 8px 10px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid2 .product-img {
+        height: 140px;
+    }
+    
+    .products-grid2 .product-name {
+        font-size: 0.8rem;
+    }
+    
+    .products-grid2 .product-price {
+        font-size: 0.9rem;
+    }
+    
+    .products-grid2 .btn-add-to-cart {
+        padding: 6px 8px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Hide size selector in Add Product form (Admin) */
+#addProductSection .size-checkbox-group,
+#addProductSection .selected-sizes,
+#addProductSection .form-group:has(label i.fa-tshirt),
+#addProductSection .form-group label[for*="size"],
+#addProductSection .size-selector {
+    display: none !important;
+}
+
+/* Hide size selector in Edit Product modal */
+#editProductModal .size-checkbox-group,
+#editProductModal .selected-sizes,
+#editProductModal .form-group:has(label:contains("Available Sizes")),
+#editSizeCheckboxGroup,
+#editSelectedSizesDisplay {
+    display: none !important;
+}
+
+/* Hide size selector in Product Cards (Shop page) */
+.product-card .size-selector,
+.product-card .size-input,
+.product-card label[for*="size"] {
+    display: none !important;
+}
+
+/* Hide size selector in Full Screen Product Modal */
+.full-screen-details .full-screen-sizes,
+.full-screen-details .size-buttons,
+.full-screen-sizes {
+    display: none !important;
+}
+
+/* Hide size badges in Cart page */
+.cart-item .size-display,
+.cart-item .size-badge:first-child,
+.size-display {
+    display: none !important;
+}
+
+/* Hide size info in Checkout form */
+.checkout-form .size-badge,
+.checkout-form .size-display {
+    display: none !important;
+}
+
+/* Hide size in Order summary (Checkout) */
+.cart-item .size-badge {
+    display: none !important;
+}
+
+/* Hide size in Order items (Orders page) */
+.order-item span:contains("Size:"),
+.order-item .size-badge {
+    display: none !important;
+}
+
+/* Hide size display in cart item info */
+.cart-item-info .size-display {
+    display: none !important;
+}
+
+/* Hide size in My Orders page */
+.order-item .size-badge,
+.order-item span:contains("Size:"),
+.order-items .size-badge,
+.order-card .size-badge,
+.order-card .size-display,
+.orders-container .size-badge,
+.orders-container .size-display {
+    display: none !important;
+}
+
+/* Hide size in individual order item text */
+.order-item span {
+    font-size: inherit;
+}
+
+/* Remove any size text from order items */
+.order-items .order-item span:first-child {
+    /* This will remove "(Size: M)" text if present in the order item name */
+    display: inline-block;
+}
+
+/* Hide size in toaster notifications */
+.notification .size-badge,
+.notification span:contains("Size:"),
+.notification .size-display {
+    display: none !important;
+}
+
+/* Hide size in any notification message text */
+.notification span {
+    font-size: inherit;
+}
+
 
     </style>
 </head>
@@ -8015,7 +8593,7 @@ html {
             </div>
         
             <h2 class="section-title"><i class="fas fa-fire"></i> Featured Products</h2>
-            <div class="products-grid" id="featuredProducts"></div>
+            <div class="products-grid1" id="featuredProducts"></div>
         
             <!-- Google Map Section -->
             <div class="map-section">
@@ -8047,8 +8625,18 @@ html {
             <h2 class="section-title">
                 <i class="fas fa-store"></i> All Products
             </h2>
-            <div id="categoryFilters" class="category-filters"></div>
-            <div class="products-grid" id="allProducts"></div>
+            
+            <!-- Category Filter as Dropdown -->
+            <div class="category-filter-wrapper">
+                <label for="categorySelect" class="filter-label">
+                    <i class="fas fa-filter"></i> Filter by Category:
+                </label>
+                <select id="categorySelect" class="category-dropdown" onchange="filterByCategoryDropdown(this.value)">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+            
+            <div class="products-grid2" id="allProducts"></div>
         </div>
 
         <!-- Cart Page -->
@@ -9791,7 +10379,7 @@ html {
                         <div class="order-items">
                             ${order.items.map(item => `
                                 <div class="order-item" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span>${item.name} ${item.size ? `(Size: ${item.size})` : ''} x${item.quantity || 1}</span>
+                                    <span>${item.name}  x${item.quantity || 1}</span>
                                     <span>₹${item.subtotal.toFixed(2)}</span>
                                 </div>
                             `).join('')}
@@ -11088,6 +11676,301 @@ if (document.readyState === 'loading') {
 } else {
     initNavigation();
 }
+
+async function loadProducts() {
+    try {
+        const res = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({ action: "getProducts" })
+        });
+        const data = await res.json();
+        if (data.success) {
+            allProducts = data.data || [];
+        } else {
+            allProducts = [];
+        }
+        
+        // Render all sections
+        renderFeaturedProducts();
+        renderAllProductsGrid2();      // Use the grid2 render function
+        populateCategoryDropdown();    // Populate the dropdown
+        updateAdminProducts();
+        renderAdminAllProducts();
+        
+    } catch (error) {
+        console.error('Error loading products:', error);
+        allProducts = [];
+    }
+}
+
+// Populate category dropdown
+function populateCategoryDropdown() {
+    const categorySelect = document.getElementById('categorySelect');
+    if (!categorySelect) return;
+    
+    const categories = ['all', ...new Set(allProducts.map(p => p[6]).filter(Boolean))];
+    
+    categorySelect.innerHTML = categories.map(category => 
+        `<option value="${category}" ${category === selectedCategory ? 'selected' : ''}>
+            ${category === 'all' ? 'All Categories' : category}
+        </option>`
+    ).join('');
+}
+
+// Filter by category from dropdown
+function filterByCategoryDropdown(category) {
+    selectedCategory = category;
+    renderAllProductsGrid2();
+}
+
+// Render all products in products-grid2
+function renderAllProductsGrid2() {
+    const container = document.getElementById('allProducts');
+    if (!container) return;
+    
+    const filteredProducts = selectedCategory === 'all' 
+        ? allProducts 
+        : allProducts.filter(p => p[6] === selectedCategory);
+    
+    if (filteredProducts.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 3rem;">No products found in this category</p>';
+        return;
+    }
+    
+    container.innerHTML = filteredProducts.map(product => createProductCardGrid2(product)).join('');
+}
+
+// Create product card for grid2
+function createProductCardGrid2(product) {
+    let sizes = ['M'];
+    try { 
+        if (product[5]) sizes = JSON.parse(product[5]); 
+    } catch(e) {}
+    
+    let imgUrl = product[4] || '';
+    try {
+        if (product[7] && typeof product[7] === 'string') {
+            const images = JSON.parse(product[7]);
+            if (images && images.length > 0) imgUrl = images[0];
+        }
+    } catch(e) {}
+    
+    const productData = {
+        id: product[0],
+        name: product[1],
+        price: product[2],
+        desc: product[3],
+        imageUrl: imgUrl,
+        sizes: sizes,
+        category: product[6] || ''
+    };
+    
+    let sizeOptionsHTML = '';
+    if (productData.sizes && productData.sizes.length > 0) {
+        sizeOptionsHTML = productData.sizes.map(size => 
+            `<option value="${size}">${size}</option>`
+        ).join('');
+    } else {
+        sizeOptionsHTML = '<option value="M">M</option>';
+    }
+    
+    return `
+        <div class="product-card">
+            <div class="product-img" style="${imgUrl ? `background-image: url('${imgUrl}')` : 'background-color: #f5efe6;'}" 
+                 onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">
+                ${productData.category ? `<span class="product-category">${productData.category}</span>` : ''}
+                ${!imgUrl ? `<i class="fas fa-box product-img-placeholder"></i>` : ''}
+            </div>
+            <div class="product-info">
+                <h3 class="product-name" onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">${productData.name}</h3>
+                <p class="product-desc">${productData.desc || 'No description available'}</p>
+                <div class="product-price">₹${productData.price}</div>
+                <div class="size-selector">
+                    <select id="size-${productData.id}" class="size-input">
+                        ${sizeOptionsHTML}
+                    </select>
+                </div>
+                <button class="btn-add-to-cart" onclick="addToCartFromGrid2(${JSON.stringify(productData).replace(/"/g, '&quot;')}, this)">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Add to cart function for grid2
+function addToCartFromGrid2(productData, btn) {
+    if (!user) {
+        toggleAuthModal();
+        return;
+    }
+    
+    let product;
+    if (typeof productData === 'string') {
+        try { product = JSON.parse(productData); } catch(e) { return; }
+    } else {
+        product = productData;
+    }
+    
+    const sizeSelect = btn.parentElement.querySelector('.size-input');
+    const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+    
+    const existingIndex = cartItems.findIndex(item => 
+        item.id === product.id && item.size === selectedSize
+    );
+    
+    if (existingIndex !== -1) {
+        cartItems[existingIndex].quantity = (cartItems[existingIndex].quantity || 1) + 1;
+        showNotification(`${product.name} (Size: ${selectedSize}) quantity updated!`, 'success');
+    } else {
+        cartItems.push({
+            ...product,
+            size: selectedSize,
+            quantity: 1
+        });
+        showNotification(`${product.name} (Size: ${selectedSize}) added to cart!`, 'success');
+    }
+    
+    updateCartCount();
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    document.getElementById(pageId).classList.add('active');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    
+    // Close mobile menu
+    closeMobileMenu();
+    
+    switch(pageId) {
+        case 'cartPage':
+            if (!user) {
+                showLoginRequired('cartPage');
+            } else {
+                renderCart();
+            }
+            break;
+        case 'ordersPage':
+            if (!user) {
+                showLoginRequired('ordersPage');
+            } else {
+                loadUserOrders();
+            }
+            break;
+        case 'admin':
+            if (role !== 'admin') {
+                showPage('home');
+                return;
+            }
+            loadAdminOrders();
+            break;
+        case 'products':
+            renderAllProductsGrid2();  // Use the new function
+            populateCategoryDropdown(); // Ensure dropdown is populated
+            break;
+        case 'home':
+            renderFeaturedProducts();
+            break;
+    }
+}
+
+// Function to hide all size-related elements
+function hideAllSizeElements() {
+    // Hide in Add Product form
+    const sizeCheckboxGroup = document.getElementById('sizeCheckboxGroup');
+    const selectedSizesDisplay = document.getElementById('selectedSizesDisplay');
+    if (sizeCheckboxGroup) sizeCheckboxGroup.style.display = 'none';
+    if (selectedSizesDisplay) selectedSizesDisplay.style.display = 'none';
+    
+    // Hide label for sizes in add product
+    const sizeLabels = document.querySelectorAll('#addProductSection .form-group label');
+    sizeLabels.forEach(label => {
+        if (label.textContent.includes('Available Sizes') || label.innerHTML.includes('fa-tshirt')) {
+            label.closest('.form-group').style.display = 'none';
+        }
+    });
+    
+    // Hide in Edit Product modal
+    const editSizeGroup = document.getElementById('editSizeCheckboxGroup');
+    const editSelectedSizes = document.getElementById('editSelectedSizesDisplay');
+    if (editSizeGroup) editSizeGroup.closest('.form-group').style.display = 'none';
+    if (editSelectedSizes) editSelectedSizes.style.display = 'none';
+    
+    // Hide size selectors in product cards on shop page
+    document.querySelectorAll('.product-card .size-selector').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Hide size section in full screen modal
+    document.querySelectorAll('.full-screen-sizes, .full-screen-details .size-buttons').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Hide size badges in cart
+    document.querySelectorAll('.cart-item .size-display, .size-display, .size-badge').forEach(el => {
+        el.style.display = 'none';
+    });
+}
+
+// Call this function after products load and after cart render
+const originalRenderCart = renderCart;
+renderCart = function() {
+    originalRenderCart();
+    setTimeout(() => {
+        document.querySelectorAll('.cart-item .size-display, .size-display').forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+    }, 100);
+};
+
+// Call hideAllSizeElements in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    hideAllSizeElements();
+});
+
+function showNotification(message, type = 'success') {
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(notif => notif.remove());
+    
+    // Remove size information from notification message
+    let cleanMessage = message;
+    // Remove patterns like " (Size: M)", "(Size: XL)", etc.
+    cleanMessage = cleanMessage.replace(/\s*\(Size:\s*\w+\)/gi, '');
+    cleanMessage = cleanMessage.replace(/\s*Size:\s*\w+\s*/gi, '');
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+        <span>${cleanMessage}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 3000);
+}
+
+// In addToCart function, replace:
+showNotification(`${product.name} (Size: ${selectedSize}) added to cart!`, 'success');
+// With:
+showNotification(`${product.name} added to cart!`, 'success');
+
+// Replace quantity update notification:
+showNotification(`${product.name} quantity updated to ${cartItems[existingIndex].quantity}!`, 'success');
+// With:
+showNotification(`${product.name} quantity updated!`, 'success');
     </script>
 </body>
 </html>
