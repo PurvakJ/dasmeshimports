@@ -8890,7 +8890,7 @@ html {
         <div class="modal-content">
             <button class="close-modal" onclick="toggleAuthModal()">&times;</button>
             <div class="modal-header">
-                <h3>Welcome to Rarefold</h3>
+                <h3>Welcome to Dasmesh Import</h3>
             </div>
             <div class="modal-body">
                 <div class="auth-tabs">
@@ -8916,7 +8916,7 @@ html {
                     <button class="btn btn-primary" onclick="login()" style="width: 100%;">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </button>
-                    <div class="form-divider"><span>New to Rarefold?</span></div>
+                    <div class="form-divider"><span>New to Dasmesh Import?</span></div>
                     <button class="btn btn-secondary" onclick="switchAuthTab('signup')" style="width: 100%; color:black;">
                         <i class="fas fa-user-plus"></i> Create New Account
                     </button>
@@ -9074,7 +9074,7 @@ html {
         
         // API URL
         const API = "https://script.google.com/macros/s/AKfycbxooJDx5OOquuqJSka80jFk5Dzwa_y054BtjvQnMk5faOh9Ye9LxPwbg5FYYKUU7o1SMw/exec";
-        const RAZORPAY_KEY = "rzp_live_SHY8pGfg0b1Sz0";
+        const RAZORPAY_KEY = "rzp_live_Slz1svE4IWrMih";
 
         let user = null;
         let role = null;
@@ -10250,7 +10250,7 @@ html {
                 key: RAZORPAY_KEY,
                 amount: finalTotal * 100,
                 currency: "INR",
-                name: "Rarefold",
+                name: "Dasmesh Import",
                 description: `Order Payment${discountData ? ` (Discount: ${discountData.percent}% off)` : ''}`,
                 handler: async function (res) {
                     try {
