@@ -9862,9 +9862,412 @@ input:checked + .sell-toggle-slider {
     background: #8a7a6a !important;
 }
 
+/* Logo Image Styling */
+.logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+    .logo-img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .logo span {
+        font-size: 0.9rem;
+    }
+}
+
+/* ==================== LOADING SCREEN STYLES ==================== */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow: hidden;
+}
+
+.loader-container.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Logo Animation */
+.logo-wrapper {
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.logo-wrapper.pulsing-rotating {
+    animation: pulseRotate 2s ease-in-out infinite;
+}
+
+.logo-wrapper.centering {
+    animation: centerLogoWithRotate 1.5s ease-out forwards;
+}
+
+.loader-logo {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+}
+
+/* Logo ring effects */
+.logo-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    animation: ringPulse 2s ease-in-out infinite;
+    z-index: 1;
+}
+
+.logo-ring-outer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 230px;
+    height: 230px;
+    border: 2px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    animation: ringRotate 8s linear infinite;
+    z-index: 1;
+}
+
+@keyframes pulseRotate {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(90deg); }
+    50% { transform: scale(1.1) rotate(180deg); }
+    75% { transform: scale(1.2) rotate(270deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+@keyframes centerLogoWithRotate {
+    0% { transform: scale(1) rotate(0deg) translateY(0); }
+    20% { transform: scale(1.3) rotate(90deg) translateY(-30px); }
+    40% { transform: scale(1.2) rotate(180deg); }
+    60% { transform: scale(1.1) rotate(270deg); }
+    80% { transform: scale(1.05) rotate(315deg); }
+    100% { transform: scale(1) rotate(360deg) translateY(0); }
+}
+
+@keyframes ringPulse {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes ringRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Text Animation */
+.text-container {
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+    min-height: 80px;
+}
+
+.text-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.company-name {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: #a87b4e;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tagline Animation */
+.tagline-container {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease 0.2s;
+}
+
+.tagline-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tagline {
+    font-size: 18px;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0 20px;
+    display: inline-block;
+    animation: taglineGlow 2s ease-in-out infinite;
+}
+
+.tagline::before,
+.tagline::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #a87b4e, transparent);
+}
+
+.tagline::before {
+    left: -30px;
+    animation: lineExpand 1.5s ease-out forwards;
+}
+
+.tagline::after {
+    right: -30px;
+    animation: lineExpand 1.5s ease-out forwards 0.3s;
+}
+
+@keyframes lineExpand {
+    0% { width: 0; opacity: 0; }
+    100% { width: 30px; opacity: 1; }
+}
+
+@keyframes taglineGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(168, 123, 78, 0); }
+    50% { text-shadow: 0 0 20px rgba(168, 123, 78, 0.3); }
+}
+
+/* Loading Bar */
+.loading-bar-container {
+    margin-top: 40px;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.5s ease;
+}
+
+.loading-bar-container.visible {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.loading-bar {
+    width: 300px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.loading-bar-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #a87b4e, #8b5e3c, #a87b4e, transparent);
+    animation: loadingProgress 1.5s ease-in-out infinite;
+    border-radius: 4px;
+}
+
+@keyframes loadingProgress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+/* Background Decoration */
+.loader-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.loader-background span {
+    position: absolute;
+    font-size: 120px;
+    color: rgba(0, 0, 0, 0.03);
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    white-space: nowrap;
+    animation: floatBackground 15s linear infinite;
+}
+
+.loader-background span:nth-child(1) {
+    top: 10%;
+    left: -10%;
+    animation-duration: 20s;
+    transform: rotate(-10deg);
+}
+
+.loader-background span:nth-child(2) {
+    bottom: 20%;
+    right: -10%;
+    font-size: 180px;
+    animation-duration: 25s;
+    animation-direction: reverse;
+    transform: rotate(5deg);
+}
+
+.loader-background span:nth-child(3) {
+    top: 40%;
+    right: 5%;
+    font-size: 90px;
+    animation-duration: 15s;
+    transform: rotate(15deg);
+}
+
+@keyframes floatBackground {
+    0% { transform: translateX(0) rotate(0deg) scale(1); }
+    50% { transform: translateX(-25%) rotate(5deg) scale(1.1); }
+    100% { transform: translateX(-50%) rotate(10deg) scale(1); }
+}
+
+/* Furniture Icons Decoration */
+.furniture-icon {
+    position: absolute;
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.06);
+    animation: floatIcon 10s linear infinite;
+    z-index: 1;
+}
+
+.furniture-icon:nth-child(1) { top: 15%; left: 10%; animation-duration: 12s; }
+.furniture-icon:nth-child(2) { bottom: 25%; right: 12%; animation-duration: 15s; animation-direction: reverse; }
+.furniture-icon:nth-child(3) { top: 60%; left: 8%; animation-duration: 18s; }
+.furniture-icon:nth-child(4) { top: 30%; right: 20%; animation-duration: 14s; }
+.furniture-icon:nth-child(5) { bottom: 40%; left: 15%; animation-duration: 16s; }
+.furniture-icon:nth-child(6) { top: 70%; right: 25%; animation-duration: 20s; }
+
+@keyframes floatIcon {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+    33% { transform: translateY(-20px) rotate(120deg) scale(1.1); opacity: 0.5; }
+    66% { transform: translateY(20px) rotate(240deg) scale(0.9); opacity: 0.3; }
+    100% { transform: translateY(0) rotate(360deg) scale(1); opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .company-name { font-size: 36px; }
+    .loader-logo { width: 140px; }
+    .logo-ring { width: 160px; height: 160px; }
+    .logo-ring-outer { width: 190px; height: 190px; }
+    .tagline { font-size: 14px; }
+    .loading-bar { width: 250px; }
+    .loader-background span { font-size: 80px; }
+    .furniture-icon { font-size: 30px; }
+}
+
+@media (max-width: 480px) {
+    .company-name { font-size: 28px; }
+    .loader-logo { width: 120px; }
+    .logo-ring { width: 140px; height: 140px; }
+    .logo-ring-outer { width: 170px; height: 170px; }
+    .tagline { font-size: 12px; }
+    .loading-bar { width: 200px; }
+}
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+<div id="loadingScreen" class="loader-container">
+    <div class="loader-background">
+        <span>DASMESH IMPORTS</span>
+        <span>FURNITURE & HOME</span>
+        <span>PREMIUM QUALITY</span>
+    </div>
+    
+    <div class="furniture-icon">🛏️</div>
+    <div class="furniture-icon">🪑</div>
+    <div class="furniture-icon">🛋️</div>
+    <div class="furniture-icon">🗄️</div>
+    <div class="furniture-icon">🪞</div>
+    <div class="furniture-icon">💡</div>
+
+    <div class="loader-content">
+        <div class="logo-wrapper pulsing-rotating" id="logoWrapper">
+            <img src="https://i.postimg.cc/0jmkXrMF/Screenshot-2026-05-06-at-18-15-23-removebg-preview.png" 
+                 alt="Dasmesh Imports Logo" 
+                 class="loader-logo">
+            <div class="logo-ring"></div>
+            <div class="logo-ring-outer"></div>
+        </div>
+        
+        <div class="text-container" id="textContainer">
+            <div class="company-name">DASMESH IMPORTS</div>
+        </div>
+
+        <div class="tagline-container" id="taglineContainer">
+            <span class="tagline">Premium Furniture Imports</span>
+        </div>
+
+        <div class="loading-bar-container" id="loadingBarContainer">
+            <div class="loading-bar">
+                <div class="loading-bar-progress"></div>
+            </div>
+        </div>
+    </div>
+</div>
     <header>
         <div class="header-container">
             <button class="hamburger" id="hamburgerBtn">
@@ -9874,7 +10277,9 @@ input:checked + .sell-toggle-slider {
             </button>
             
             <div class="logo">
-                <i class="fas fa-couch"></i>
+                <img src="https://i.postimg.cc/0jmkXrMF/Screenshot-2026-05-06-at-18-15-23-removebg-preview.png" 
+                     alt="Dasmesh Imports Logo" 
+                     class="logo-img">
                 <span>Dasmesh Imports</span>
             </div>
             
@@ -10528,6 +10933,55 @@ input:checked + .sell-toggle-slider {
         let allDiscountCodes = [];
         
         /* ---------- CLOUDINARY UPLOAD FUNCTIONS ---------- */
+
+        // Loading Screen Handler
+(function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const logoWrapper = document.getElementById('logoWrapper');
+    const textContainer = document.getElementById('textContainer');
+    const taglineContainer = document.getElementById('taglineContainer');
+    const loadingBarContainer = document.getElementById('loadingBarContainer');
+    
+    let animationState = 'initial';
+    let showText = false;
+    let showTagline = false;
+    
+    // Hide all content initially
+    document.body.style.overflow = 'hidden';
+    
+    // Start animations
+    setTimeout(() => {
+        animationState = 'centering';
+        logoWrapper.classList.remove('pulsing-rotating');
+        logoWrapper.classList.add('centering');
+    }, 2000);
+    
+    // Show text after 2.2 seconds
+    setTimeout(() => {
+        showText = true;
+        textContainer.classList.add('visible');
+    }, 2200);
+    
+    // Show tagline after 3.5 seconds
+    setTimeout(() => {
+        showTagline = true;
+        taglineContainer.classList.add('visible');
+        loadingBarContainer.classList.add('visible');
+    }, 3500);
+    
+    // Fade out loader after 4.5 seconds
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        document.body.style.overflow = '';
+        
+        // Remove loader from DOM after animation
+        setTimeout(() => {
+            if (loadingScreen && loadingScreen.parentNode) {
+                loadingScreen.style.display = 'none';
+            }
+        }, 500);
+    }, 4500);
+})();
         
         async function uploadImageToCloudinary(file) {
             const data = new FormData();
