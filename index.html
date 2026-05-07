@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="hNEVE4PHnoa6nuWade0rf332L-nLoi60TETNB8YqCCU" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dasmesh Imports</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -11107,6 +11106,27 @@ input:checked + .sell-toggle-slider {
     }
 }
 
+/* Change Password Button Style */
+#changePasswordBtn, #mobileChangePasswordBtn {
+    background: transparent;
+    border: 1px solid var(--gray-light);
+    color: var(--dark);
+}
+
+#changePasswordBtn:hover, #mobileChangePasswordBtn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+#changePasswordBtn i, #mobileChangePasswordBtn i {
+    color: var(--primary);
+}
+
+#changePasswordBtn:hover i, #mobileChangePasswordBtn:hover i {
+    color: white;
+}
+
     </style>
 </head>
 <body>
@@ -11184,6 +11204,9 @@ input:checked + .sell-toggle-slider {
                 <button class="nav-btn" data-page="ordersPage" id="ordersBtn">
                     <i class="fas fa-box"></i> My Orders
                 </button>
+                <button class="nav-btn" id="changePasswordBtn" style="display: none;">
+                    <i class="fas fa-key"></i> Change Password
+                </button>
                 <button class="nav-btn" id="authBtn">
                     <i class="fas fa-user"></i> Login
                 </button>
@@ -11232,6 +11255,9 @@ input:checked + .sell-toggle-slider {
         <button class="mobile-nav-btn" data-page="ordersPage" id="mobileOrdersBtn">
             <i class="fas fa-box"></i> My Orders
         </button>
+        <button class="mobile-nav-btn" id="mobileChangePasswordBtn" style="display: none;">
+            <i class="fas fa-key"></i> Change Password
+        </button>
         <button class="mobile-nav-btn" id="mobileAuthBtn">
             <i class="fas fa-user"></i> Login
         </button>
@@ -11273,7 +11299,7 @@ input:checked + .sell-toggle-slider {
                     <i class="fas fa-map-marker-alt"></i> Near Arvind Nagar, Opp Janat Enclave, Mansa, Punjab
                 </div>
                 <div class="business-contacts">
-                    <span><i class="fas fa-phone-alt"></i> 📱 91941-91940</span>
+                    <span><i class="fas fa-phone-alt"></i> 📱+91 91941-91940</span>
                     <span><i class="fas fa-phone"></i> ☎️ 01652 291946</span>
                 </div>
             </div>
@@ -11830,6 +11856,45 @@ input:checked + .sell-toggle-slider {
         </div>
     </div>
 
+    <!-- Change Password Modal -->
+<div id="changePasswordModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="toggleChangePasswordModal()">&times;</button>
+        <div class="modal-header">
+            <h3><i class="fas fa-key"></i> Change Password</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Current Password *</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="currentPassword" placeholder="Enter current password" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>New Password *</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="newPassword" placeholder="Enter new password" class="form-control">
+                </div>
+                <small>Password must be at least 6 characters long</small>
+            </div>
+            <div class="form-group">
+                <label>Confirm New Password *</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-check-circle"></i>
+                    <input type="password" id="confirmNewPassword" placeholder="Confirm new password" class="form-control">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="changePassword()" style="width: 100%;">
+                <i class="fas fa-save"></i> Update Password
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-links">
@@ -11864,7 +11929,7 @@ input:checked + .sell-toggle-slider {
         let uploadProgress = {};
         
         // API URL
-        const API = "https://script.google.com/macros/s/AKfycbyxcH1THxIXPSFloKPX_samYv0J5N7qKE0Yhu7Azi8Xd5hsHYypByQ-cPCdbreqhBe5Qg/exec";
+        const API = "https://script.google.com/macros/s/AKfycbylzhZDmQxQ8p42rUgdRTOz_ssi_iqKN-JYkKDT3QrrqXU6jdS8LR51L6ACuFHG_oQfnA/exec";
         const RAZORPAY_KEY = "rzp_live_Slz1svE4IWrMih";
         
         let user = null;
@@ -15520,6 +15585,131 @@ async function checkout() {
         await processCOD({name, phone, address: fullAddress}, discountData, checkoutBtn);
     } else {
         await processOnlinePayment({name, phone, address: fullAddress}, discountData, checkoutBtn);
+    }
+}
+
+// Toggle Change Password Modal
+function toggleChangePasswordModal() {
+    const modal = document.getElementById('changePasswordModal');
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        // Clear form fields
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmNewPassword').value = '';
+    } else {
+        modal.style.display = 'flex';
+    }
+}
+
+// Change Password Function
+async function changePassword() {
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+    
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    if (newPassword.length < 6) {
+        showNotification('New password must be at least 6 characters long', 'error');
+        return;
+    }
+    
+    if (newPassword !== confirmNewPassword) {
+        showNotification('New passwords do not match', 'error');
+        return;
+    }
+    
+    const changePwdBtn = document.querySelector('#changePasswordModal .btn-primary');
+    setButtonLoading(changePwdBtn, true);
+    
+    try {
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "changePassword",
+                email: user,
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Password changed successfully! Please login again.', 'success');
+            toggleChangePasswordModal();
+            
+            // Logout user after password change
+            setTimeout(() => {
+                logout();
+            }, 2000);
+        } else {
+            showNotification(data.error || 'Failed to change password', 'error');
+        }
+    } catch (error) {
+        console.error('Error changing password:', error);
+        showNotification('Error changing password', 'error');
+    } finally {
+        setButtonLoading(changePwdBtn, false);
+    }
+}
+
+// Updated updateAuthUI function to show change password button
+function updateAuthUI() {
+    const userInfo = document.getElementById('userInfo');
+    const mobileUserInfo = document.getElementById('mobileUserInfo');
+    const authBtn = document.getElementById('authBtn');
+    const ordersBtn = document.getElementById('ordersBtn');
+    const adminBtn = document.getElementById('adminBtn');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    const mobileOrdersBtn = document.getElementById('mobileOrdersBtn');
+    const mobileAdminBtn = document.getElementById('mobileAdminBtn');
+    const mobileUserEmail = document.getElementById('mobileUserEmail');
+    const mobileUserRole = document.getElementById('mobileUserRole');
+    const changePasswordBtn = document.getElementById('changePasswordBtn');
+    const mobileChangePasswordBtn = document.getElementById('mobileChangePasswordBtn');
+
+    if (user) {
+        userInfo.style.display = 'none';
+        mobileUserInfo.style.display = 'block';
+        mobileUserEmail.textContent = user;
+        mobileUserRole.textContent = role === 'admin' ? 'Admin' : 'User';
+        authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+        authBtn.onclick = logout;
+        ordersBtn.style.display = 'flex';
+        mobileAuthBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+        mobileAuthBtn.onclick = function() { logout(); closeMobileMenu(); };
+        mobileOrdersBtn.style.display = 'flex';
+        
+        // Show change password button for both user and admin
+        changePasswordBtn.style.display = 'flex';
+        mobileChangePasswordBtn.style.display = 'flex';
+        changePasswordBtn.onclick = function() { toggleChangePasswordModal(); closeMobileMenu(); };
+        mobileChangePasswordBtn.onclick = function() { toggleChangePasswordModal(); closeMobileMenu(); };
+        
+        if (role === 'admin') {
+            adminBtn.style.display = 'flex';
+            mobileAdminBtn.style.display = 'flex';
+        } else {
+            adminBtn.style.display = 'none';
+            mobileAdminBtn.style.display = 'none';
+        }
+    } else {
+        userInfo.style.display = 'none';
+        mobileUserInfo.style.display = 'none';
+        authBtn.innerHTML = '<i class="fas fa-user"></i> Login';
+        authBtn.onclick = toggleAuthModal;
+        ordersBtn.style.display = 'none';
+        mobileAuthBtn.innerHTML = '<i class="fas fa-user"></i> Login';
+        mobileAuthBtn.onclick = function() { toggleAuthModal(); closeMobileMenu(); };
+        mobileOrdersBtn.style.display = 'none';
+        mobileAdminBtn.style.display = 'none';
+        adminBtn.style.display = 'none';
+        changePasswordBtn.style.display = 'none';
+        mobileChangePasswordBtn.style.display = 'none';
     }
 }
     </script>
