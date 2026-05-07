@@ -10226,6 +10226,486 @@ input:checked + .sell-toggle-slider {
     .tagline { font-size: 12px; }
     .loading-bar { width: 200px; }
 }
+
+/* Push Notification Permission Banner */
+.notification-permission-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: var(--dark);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--radius-lg);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+}
+
+.notification-permission-banner p {
+    margin: 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification-permission-banner .btn {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+}
+
+/* Order Alert Toast */
+.order-alert {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--success) 0%, #0ca678 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--radius-lg);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-lg);
+    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+    cursor: pointer;
+    max-width: 320px;
+}
+
+.order-alert i {
+    font-size: 1.5rem;
+}
+
+.order-alert-content h4 {
+    margin: 0 0 5px;
+    font-size: 0.9rem;
+}
+
+.order-alert-content p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Badge for new orders in admin */
+@keyframes pulse-red {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+}
+
+.new-order-badge {
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-left: 5px;
+    animation: pulse-red 1.5s infinite;
+}
+
+/* Multiple Image Upload Styles */
+.image-upload-section {
+    margin-bottom: 1.5rem;
+}
+
+.file-input-wrapper {
+    margin-bottom: 1rem;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.helper-text {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-top: 8px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.image-url-item {
+    position: relative;
+}
+
+.image-preview-container {
+    position: relative;
+    background: var(--light);
+    border-radius: var(--radius);
+    padding: 8px;
+    border: 1px solid var(--gray-light);
+    text-align: center;
+}
+
+.image-preview-thumb {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.remove-image-btn:hover {
+    transform: scale(1.1);
+}
+
+.uploading-indicator {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.05);
+    border-radius: var(--radius);
+    margin-top: 15px;
+}
+
+.upload-progress-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.upload-success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(46, 125, 50, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    border-radius: var(--radius);
+}
+
+.upload-failed-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(211, 47, 47, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    border-radius: var(--radius);
+}
+
+/* Full Screen Product Image Gallery */
+.full-screen-gallery {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-main-image {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gallery-main-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.gallery-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.gallery-thumb.active {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.gallery-thumb:hover {
+    transform: scale(1.05);
+}
+
+.image-count-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 3;
+}
+
+/* Full Screen Product Image Gallery with Arrows */
+.full-screen-gallery {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.gallery-main-image {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-main-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Navigation Arrows */
+.gallery-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.gallery-nav-arrow:hover {
+    background: var(--primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav-arrow.prev {
+    left: 10px;
+}
+
+.gallery-nav-arrow.next {
+    right: 10px;
+}
+
+.gallery-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.gallery-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.gallery-thumb.active {
+    border-color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.gallery-thumb:hover {
+    transform: scale(1.05);
+}
+
+/* Image counter */
+.gallery-image-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    z-index: 10;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .gallery-nav-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .gallery-nav-arrow.prev {
+        left: 5px;
+    }
+    
+    .gallery-nav-arrow.next {
+        right: 5px;
+    }
+    
+    .gallery-thumb {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .gallery-image-counter {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+    }
+}
+
+/* Ensure close button is above gallery controls */
+.full-screen-modal .close-fullscreen,
+.full-screen-modal .close-modal {
+    z-index: 100;
+}
+
+/* Touch-friendly arrow buttons on mobile */
+@media (max-width: 768px) {
+    .gallery-nav-arrow {
+        width: 44px;
+        height: 44px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .gallery-nav-arrow:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+}
     </style>
 </head>
 <body>
@@ -10269,6 +10749,7 @@ input:checked + .sell-toggle-slider {
     </div>
 </div>
     <header>
+        
         <div class="header-container">
             <button class="hamburger" id="hamburgerBtn">
                 <span></span>
@@ -10921,7 +11402,7 @@ input:checked + .sell-toggle-slider {
         let uploadProgress = {};
         
         // API URL
-        const API = "https://script.google.com/macros/s/AKfycbzYRgaO4eg2HLif6Oy8SOJibVJaGsJYbYpjsbPTbxD8NFCRCyQ5ntYWEQfo7NeCjxOgJg/exec";
+        const API = "https://script.google.com/macros/s/AKfycbwi-v4Z0-yB9MDMJIPuEL0Z2-xsF2ZutPnbjG7YE-WcDV0rmJIgE0KNKH4GDRnCJK_WTA/exec";
         const RAZORPAY_KEY = "rzp_live_Slz1svE4IWrMih";
         
         let user = null;
@@ -12859,6 +13340,1076 @@ function updateCategoryCountsInDropdown() {
         if (categoryValue !== 'all') {
             const count = getProductCountByCategoryAndType(categoryValue, currentProductType);
             option.text = `${categoryValue} (${count})`;
+        }
+    }
+}
+
+
+// ==================== PUSH NOTIFICATIONS FOR NEW ORDERS (Desktop + Mobile) ====================
+
+let currentOrdersCount = 0;
+let notificationPermission = false;
+let orderCheckInterval = null;
+let lastCheckedOrderIds = []; // Store multiple order IDs
+let notificationSoundEnabled = true;
+
+// Check if device is mobile
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Request notification permission (works on both desktop and mobile)
+async function requestNotificationPermission() {
+    if (!("Notification" in window)) {
+        console.log("This browser does not support notifications");
+        // Fallback: show alert on mobile if notifications not supported
+        if (isMobileDevice()) {
+            showToastFallback("Enable notifications in browser settings for order alerts");
+        }
+        return;
+    }
+    
+    // Check if we already requested
+    const alreadyRequested = localStorage.getItem('notification_requested');
+    
+    if (Notification.permission === "granted") {
+        notificationPermission = true;
+        showNotificationPermissionBanner(false);
+        startOrderChecking();
+        registerServiceWorker();
+    } else if (Notification.permission !== "denied") {
+        // For mobile, need user interaction
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+            notificationPermission = true;
+            localStorage.setItem('notification_requested', 'true');
+            showNotificationPermissionBanner(false);
+            startOrderChecking();
+            registerServiceWorker();
+            showNotification("🔔 Notifications enabled! You'll receive alerts for new orders.", "success");
+        } else {
+            showNotificationPermissionBanner(true);
+        }
+    } else {
+        showNotificationPermissionBanner(true);
+        
+        // On mobile, show instruction to enable manually
+        if (isMobileDevice()) {
+            showMobileNotificationGuide();
+        }
+    }
+}
+
+// Register Service Worker for mobile push notifications
+async function registerServiceWorker() {
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+        try {
+            const registration = await navigator.serviceWorker.register('/sw.js');
+            console.log('Service Worker registered');
+            
+            // Subscribe to push
+            const subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array('YOUR_VAPID_PUBLIC_KEY') // You'll need to generate this
+            });
+            console.log('Push subscription:', subscription);
+        } catch (error) {
+            console.log('Service Worker registration failed:', error);
+        }
+    }
+}
+
+// Helper for VAPID key
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+// Fallback toast for mobile
+function showToastFallback(message) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 80px;
+        left: 20px;
+        right: 20px;
+        background: #333;
+        color: white;
+        padding: 12px 16px;
+        border-radius: 12px;
+        z-index: 10001;
+        text-align: center;
+        font-size: 14px;
+        animation: slideUp 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+    `;
+    toast.innerHTML = `<i class="fas fa-bell" style="margin-right: 8px;"></i> ${message}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 5000);
+}
+
+// Show guide for enabling notifications on mobile
+function showMobileNotificationGuide() {
+    const guide = document.createElement('div');
+    guide.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: var(--dark);
+        color: white;
+        padding: 16px;
+        border-radius: 16px;
+        z-index: 10001;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        animation: slideUp 0.3s ease;
+    `;
+    guide.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: start; gap: 10px;">
+            <div style="flex: 1;">
+                <strong><i class="fas fa-bell"></i> Enable Notifications</strong>
+                <p style="margin: 8px 0 0; font-size: 12px; opacity: 0.8;">
+                    ${isMobileDevice() ? 
+                        'Tap the lock/info icon in address bar → Permissions → Enable Notifications' : 
+                        'Click the bell icon in address bar → Allow Notifications'}
+                </p>
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;">✕</button>
+        </div>
+    `;
+    document.body.appendChild(guide);
+    
+    setTimeout(() => {
+        if (guide && guide.parentNode) guide.remove();
+    }, 15000);
+}
+
+// Show/hide notification permission banner
+function showNotificationPermissionBanner(show) {
+    const existingBanner = document.querySelector('.notification-permission-banner');
+    if (existingBanner) existingBanner.remove();
+    
+    if (show && role === 'admin' && Notification.permission !== 'granted') {
+        const banner = document.createElement('div');
+        banner.className = 'notification-permission-banner';
+        banner.innerHTML = `
+            <p><i class="fas fa-bell"></i> ${isMobileDevice() ? 'Enable notifications for instant order alerts!' : 'Get instant alerts for new orders!'}</p>
+            <button class="btn btn-primary" onclick="enableNotifications()" style="background: white; color: var(--dark);">
+                <i class="fas fa-check"></i> Enable
+            </button>
+        `;
+        document.body.appendChild(banner);
+        
+        // Auto remove after 10 seconds
+        setTimeout(() => {
+            if (banner && banner.parentNode) banner.remove();
+        }, 10000);
+    }
+}
+
+function enableNotifications() {
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            notificationPermission = true;
+            localStorage.setItem('notification_requested', 'true');
+            showNotificationPermissionBanner(false);
+            startOrderChecking();
+            registerServiceWorker();
+            showNotification("🔔 Notifications enabled! You'll receive alerts for new orders.", "success");
+        } else {
+            showNotification("Please enable notifications in browser settings", "warning");
+            if (isMobileDevice()) {
+                showMobileNotificationGuide();
+            }
+        }
+    });
+}
+
+// Send push notification (works on both desktop and mobile)
+function sendOrderNotification(order) {
+    if (!notificationPermission && Notification.permission === "granted") {
+        notificationPermission = true;
+    }
+    
+    if (!notificationPermission) return;
+    
+    // Store notification in localStorage for mobile
+    const recentNotifications = JSON.parse(localStorage.getItem('recent_notifications') || '[]');
+    recentNotifications.unshift({
+        id: order.id,
+        time: Date.now(),
+        message: `Order #${order.id}`
+    });
+    localStorage.setItem('recent_notifications', JSON.stringify(recentNotifications.slice(0, 10)));
+    
+    // Show browser notification
+    try {
+        const notification = new Notification("🛍️ New Order Received!", {
+            body: `Order #${order.id} • ₹${order.total.toFixed(2)} • ${order.name || order.email}`,
+            icon: "https://i.postimg.cc/0jmkXrMF/Screenshot-2026-05-06-at-18-15-23-removebg-preview.png",
+            tag: order.id,
+            renotify: true,
+            vibrate: isMobileDevice() ? [200, 100, 200] : undefined,
+            silent: false
+        });
+        
+        notification.onclick = function() {
+            window.focus();
+            showPage('admin');
+            switchAdminTab('orders');
+            notification.close();
+        };
+        
+        notification.onclose = function() {
+            console.log('Notification closed');
+        };
+    } catch(e) {
+        console.log('Notification error:', e);
+    }
+    
+    // Show toast on screen
+    showOrderToast(order);
+    
+    // Play sound (mobile needs user interaction first, but this is okay)
+    playNotificationSound();
+    
+    // Also send to mobile via localStorage for cross-tab sync
+    localStorage.setItem('last_order_alert', JSON.stringify({
+        id: order.id,
+        time: Date.now(),
+        total: order.total,
+        name: order.name || order.email
+    }));
+}
+
+// Show toast notification on screen (better for mobile)
+function showOrderToast(order) {
+    const existingToast = document.querySelector('.order-alert');
+    if (existingToast) existingToast.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'order-alert';
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        left: ${isMobileDevice() ? '20px' : 'auto'};
+        background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+        color: white;
+        padding: ${isMobileDevice() ? '15px' : '15px 20px'};
+        border-radius: 16px;
+        z-index: 10001;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+        cursor: pointer;
+        max-width: ${isMobileDevice() ? 'calc(100% - 40px)' : '320px'};
+    `;
+    toast.innerHTML = `
+        <i class="fas fa-shopping-cart" style="font-size: ${isMobileDevice() ? '1.3rem' : '1.5rem'}"></i>
+        <div style="flex: 1;">
+            <h4 style="margin: 0 0 5px; font-size: ${isMobileDevice() ? '0.85rem' : '0.9rem'}">New Order!</h4>
+            <p style="margin: 0; font-size: ${isMobileDevice() ? '0.75rem' : '0.8rem'}; opacity: 0.9;">#${order.id} • ₹${order.total.toFixed(2)}</p>
+        </div>
+    `;
+    toast.onclick = () => {
+        showPage('admin');
+        switchAdminTab('orders');
+        toast.remove();
+    };
+    document.body.appendChild(toast);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (toast && toast.parentNode) toast.remove();
+    }, 5000);
+}
+
+// Play notification sound (works on both)
+function playNotificationSound() {
+    if (!notificationSoundEnabled) return;
+    
+    try {
+        // Use Web Audio API for better mobile support
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = 880;
+        gainNode.gain.value = 0.3;
+        
+        oscillator.start();
+        gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 1);
+        oscillator.stop(audioContext.currentTime + 1);
+        
+        // Resume audio context on mobile (required)
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    } catch(e) {
+        // Fallback: create simple beep
+        try {
+            const audio = new Audio('data:audio/wav;base64,U3RlYWx0aCB8IFNvdW5k');
+            audio.volume = 0.3;
+            audio.play().catch(console.log);
+        } catch(ex) {}
+    }
+}
+
+// Check for new orders
+async function checkForNewOrders() {
+    if (role !== 'admin') return;
+    
+    try {
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({ action: "getOrders", role: "admin" })
+        });
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            const orders = data.data;
+            
+            // Sort by date (newest first)
+            const sortedOrders = orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Check for new pending orders
+            for (const order of sortedOrders) {
+                if (order.status === 'pending') {
+                    // Check if we've already notified about this order
+                    if (!lastCheckedOrderIds.includes(order.id)) {
+                        const orderTime = new Date(order.date);
+                        const now = new Date();
+                        const timeDiff = (now - orderTime) / 1000;
+                        
+                        // If order is less than 1 minute old, it's new
+                        if (timeDiff < 60) {
+                            sendOrderNotification(order);
+                            lastCheckedOrderIds.push(order.id);
+                            
+                            // Keep only last 20 IDs
+                            if (lastCheckedOrderIds.length > 20) {
+                                lastCheckedOrderIds.shift();
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Update admin order badge
+            updateAdminOrderBadge(orders);
+        }
+    } catch (error) {
+        console.error('Error checking orders:', error);
+    }
+}
+
+// Update admin button badge with pending count
+function updateAdminOrderBadge(orders) {
+    const adminBtn = document.getElementById('adminBtn');
+    const mobileAdminBtn = document.getElementById('mobileAdminBtn');
+    
+    if (!adminBtn || role !== 'admin') return;
+    
+    // Count pending orders
+    const pendingOrders = orders.filter(o => o.status === 'pending');
+    const pendingCount = pendingOrders.length;
+    
+    // Update badge on desktop
+    const existingBadge = adminBtn.querySelector('.new-order-badge');
+    if (existingBadge) existingBadge.remove();
+    
+    if (pendingCount > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'new-order-badge';
+        badge.textContent = pendingCount > 9 ? '9+' : pendingCount;
+        adminBtn.appendChild(badge);
+        
+        // Update mobile badge
+        if (mobileAdminBtn) {
+            const mobileBadge = mobileAdminBtn.querySelector('.new-order-badge');
+            if (mobileBadge) mobileBadge.remove();
+            const newMobileBadge = document.createElement('span');
+            newMobileBadge.className = 'new-order-badge';
+            newMobileBadge.textContent = pendingCount > 9 ? '9+' : pendingCount;
+            mobileAdminBtn.appendChild(newMobileBadge);
+        }
+        
+        // Update browser title with count (good for mobile tabs)
+        if (document.hidden) {
+            document.title = `(${pendingCount}) Dasmesh Imports`;
+        } else {
+            document.title = 'Dasmesh Imports';
+        }
+        
+        // Vibrate on mobile for new orders if supported
+        if (isMobileDevice() && pendingCount > 0 && navigator.vibrate) {
+            navigator.vibrate(200);
+        }
+    } else {
+        if (!document.hidden) {
+            document.title = 'Dasmesh Imports';
+        }
+        if (mobileAdminBtn) {
+            const mobileBadge = mobileAdminBtn.querySelector('.new-order-badge');
+            if (mobileBadge) mobileBadge.remove();
+        }
+    }
+}
+
+// Start checking for new orders
+function startOrderChecking() {
+    if (orderCheckInterval) clearInterval(orderCheckInterval);
+    
+    // Initial check
+    setTimeout(() => checkForNewOrders(), 1000);
+    
+    // Check every 10 seconds (faster for mobile)
+    orderCheckInterval = setInterval(() => {
+        if (role === 'admin') {
+            checkForNewOrders();
+        }
+    }, 10000);
+}
+
+// Stop order checking
+function stopOrderChecking() {
+    if (orderCheckInterval) {
+        clearInterval(orderCheckInterval);
+        orderCheckInterval = null;
+    }
+}
+
+// Handle page visibility change
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && role === 'admin') {
+        document.title = 'Dasmesh Imports';
+        checkForNewOrders();
+    } else if (document.hidden && role === 'admin') {
+        // Update title with pending count when minimized
+        const pendingElement = document.querySelector('#adminOrders .status-pending');
+        if (pendingElement) {
+            const count = document.querySelectorAll('#adminOrders .status-pending').length;
+            if (count > 0) {
+                document.title = `(${count}) Dasmesh Imports`;
+            }
+        }
+    }
+});
+
+// Show notification for existing pending orders on page load
+function showPendingOrdersNotification() {
+    if (role === 'admin' && notificationPermission) {
+        const pendingElements = document.querySelectorAll('#adminOrders .status-pending');
+        const pendingCount = pendingElements.length;
+        
+        if (pendingCount > 0) {
+            // Show a summary notification
+            const notification = new Notification(`📋 ${pendingCount} Pending Order${pendingCount > 1 ? 's' : ''}`, {
+                body: `You have ${pendingCount} order${pendingCount > 1 ? 's' : ''} waiting for processing.`,
+                icon: "https://i.postimg.cc/0jmkXrMF/Screenshot-2026-05-06-at-18-15-23-removebg-preview.png",
+                tag: 'pending-summary'
+            });
+        }
+    }
+}
+
+// Check for localStorage alerts (for cross-tab sync)
+function checkLocalStorageAlerts() {
+    const lastAlert = localStorage.getItem('last_order_alert');
+    if (lastAlert) {
+        const alert = JSON.parse(lastAlert);
+        const timeDiff = (Date.now() - alert.time) / 1000;
+        
+        // If alert is recent and not shown yet
+        if (timeDiff < 30) {
+            showOrderToast({ id: alert.id, total: alert.total, name: alert.name });
+            localStorage.removeItem('last_order_alert');
+        }
+    }
+}
+
+// Modify the existing updateAuthUI function
+const originalUpdateAuthUI = window.updateAuthUI;
+window.updateAuthUI = function() {
+    if (originalUpdateAuthUI) originalUpdateAuthUI();
+    
+    if (role === 'admin') {
+        // Request notification permission after a short delay
+        setTimeout(() => {
+            if (Notification.permission !== "granted") {
+                requestNotificationPermission();
+            } else {
+                notificationPermission = true;
+                startOrderChecking();
+                setTimeout(() => showPendingOrdersNotification(), 2000);
+            }
+        }, 2000);
+        
+        // Start localStorage alert checker
+        setInterval(checkLocalStorageAlerts, 5000);
+    } else {
+        stopOrderChecking();
+    }
+};
+
+// Override loadAdminOrders to update badge
+const originalLoadAdminOrders = window.loadAdminOrders;
+window.loadAdminOrders = async function() {
+    if (originalLoadAdminOrders) await originalLoadAdminOrders();
+    if (role === 'admin') {
+        setTimeout(() => checkForNewOrders(), 500);
+    }
+};
+
+// Export functions for global access
+window.enableNotifications = enableNotifications;
+window.requestNotificationPermission = requestNotificationPermission;
+window.checkForNewOrders = checkForNewOrders;
+
+
+// Update the createProductCardGrid2 function to handle multiple images
+function createProductCardGrid2(product) {
+    let sizes = ['M'];
+    try { if (product[5]) sizes = JSON.parse(product[5]); } catch(e) {}
+    
+    let imgUrl = product[4] || '';
+    let allImages = [];
+    try {
+        if (product[9] && typeof product[9] === 'string') {
+            allImages = JSON.parse(product[9]);
+            if (allImages && allImages.length > 0) {
+                imgUrl = allImages[0];
+            }
+        } else if (product[7] && typeof product[7] === 'string') {
+            const images = JSON.parse(product[7]);
+            if (images && images.length > 0) imgUrl = images[0];
+        }
+    } catch(e) {}
+    
+    const sellOnline = product[8] === true || product[8] === 'true' || product[8] === 1;
+    
+    const productData = {
+        id: product[0],
+        name: product[1],
+        price: product[2],
+        desc: product[3],
+        imageUrl: imgUrl,
+        imageUrls: allImages,
+        sizes: sizes,
+        category: product[6] || '',
+        sell_online: sellOnline
+    };
+    
+    let sizeOptionsHTML = '';
+    if (productData.sizes && productData.sizes.length > 0) {
+        sizeOptionsHTML = productData.sizes.map(size => `<option value="${size}">${size}</option>`).join('');
+    } else {
+        sizeOptionsHTML = '<option value="M">M</option>';
+    }
+    
+    const addToCartButton = sellOnline ? `
+        <button class="btn-add-to-cart" onclick="addToCartFromGrid2(${JSON.stringify(productData).replace(/"/g, '&quot;')}, this)">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+    ` : '';
+    
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="background: #999;"><i class="fas fa-store"></i> Store Only</span>`;
+    
+    return `
+        <div class="product-card ${sellOnline ? 'selling-product' : ''}" data-selling="${sellOnline}">
+            <div class="product-img" style="${imgUrl ? `background-image: url('${imgUrl}')` : 'background-color: #f5efe6;'}" 
+                 onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">
+                ${productData.category ? `<span class="product-category">${productData.category}</span>` : ''}
+                ${sellBadge}
+                ${!imgUrl ? `<i class="fas fa-box product-img-placeholder"></i>` : ''}
+            </div>
+            <div class="product-info">
+                <h3 class="product-name" onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">${productData.name}</h3>
+                <p class="product-desc">${productData.desc || 'No description available'}</p>
+                <div class="product-price">₹${productData.price}</div>
+                <div class="size-selector">
+                    <select id="size-${productData.id}" class="size-input">${sizeOptionsHTML}</select>
+                </div>
+                ${addToCartButton}
+            </div>
+        </div>
+    `;
+}
+
+// Update openFullScreenProduct to show image gallery
+function openFullScreenProduct(productData) {
+    let product = typeof productData === 'string' ? JSON.parse(productData) : productData;
+    
+    const sellOnline = product.sell_online === true || product.sell_online === 'true' || product.sell_online === 1;
+    
+    let availableSizes = ['M'];
+    try { 
+        if (product.sizes) availableSizes = typeof product.sizes === 'string' ? JSON.parse(product.sizes) : product.sizes; 
+    } catch(e) {}
+    
+    let sizeButtonsHTML = availableSizes.map(size => `<button class="size-btn" onclick="selectFullScreenSize(this, '${size}')">${size}</button>`).join('');
+    
+    const modal = document.getElementById('fullScreenProductModal');
+    const content = document.getElementById('fullScreenProductContent');
+    
+    // Get all images
+    let allImages = [];
+    if (product.imageUrls && product.imageUrls.length > 0) {
+        allImages = product.imageUrls;
+    } else if (product.imageUrl) {
+        allImages = [product.imageUrl];
+    }
+    
+    // Create gallery HTML
+    let galleryHTML = '';
+    if (allImages.length > 0) {
+        galleryHTML = `
+            <div class="full-screen-gallery">
+                <div class="gallery-main-image">
+                    <img id="galleryMainImage" src="${allImages[0]}" alt="${product.name}">
+                </div>
+                <div class="gallery-thumbnails">
+                    ${allImages.map((img, idx) => `
+                        <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" onclick="changeGalleryImage(${idx}, '${img}')">
+                            <img src="${img}" alt="Thumb ${idx + 1}">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        galleryHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-box" style="font-size: 8rem; color: var(--primary); opacity: 0.3;"></i></div>`;
+    }
+    
+    const addToCartButton = sellOnline ? 
+        `<button class="btn btn-primary" onclick="addToCartFromFullScreen()"><i class="fas fa-cart-plus"></i> Add to Cart</button>` : 
+        `<button class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;"><i class="fas fa-store"></i> Not Available Online</button>`;
+    
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #2e7d32;"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #999;"><i class="fas fa-store"></i> Store Pickup Only</span>`;
+    
+    content.innerHTML = `
+        <div class="full-screen-product">
+            <div class="full-screen-image">
+                ${galleryHTML}
+            </div>
+            <div class="full-screen-details">
+                ${sellBadge}
+                ${product.category ? `<span class="full-screen-category">${product.category}</span>` : ''}
+                <h2>${product.name}</h2>
+                <div class="full-screen-price">₹${product.price}</div>
+                <div class="full-screen-description">${product.desc || 'No description available for this product.'}</div>
+                <div class="full-screen-sizes">
+                    <h3><i class="fas fa-tshirt"></i> Select Size</h3>
+                    <div class="size-buttons" id="fullScreenSizeButtons">${sizeButtonsHTML}</div>
+                </div>
+                <div class="full-screen-actions">
+                    ${addToCartButton}
+                    <button class="btn btn-secondary" onclick="closeFullScreenProduct()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    window.currentFullScreenProduct = product;
+    window.currentFullScreenSize = availableSizes[0] || 'M';
+    window.currentFullScreenSellOnline = sellOnline;
+    window.currentFullScreenImages = allImages;
+    
+    setTimeout(() => { 
+        const firstSizeBtn = document.querySelector('#fullScreenSizeButtons .size-btn'); 
+        if (firstSizeBtn) firstSizeBtn.classList.add('selected'); 
+    }, 100);
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Function to change gallery image
+function changeGalleryImage(index, imageUrl) {
+    const mainImage = document.getElementById('galleryMainImage');
+    if (mainImage) {
+        mainImage.src = imageUrl;
+        
+        // Update active thumbnail
+        document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+            if (i === index) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+}
+
+async function addProductWithImages() {
+    const addBtn = document.getElementById('addProductBtn');
+    setButtonLoading(addBtn, true);
+    
+    const name = document.getElementById('pname').value;
+    const price = document.getElementById('pprice').value;
+    const desc = document.getElementById('pdesc').value;
+    const category = document.getElementById('pcategory').value;
+    const sizes = getSelectedSizes();
+    
+    if (!name || !price) {
+        showNotification('Please fill in required fields', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    if (sizes.length === 0) {
+        showNotification('Please select at least one size', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    if (selectedFiles.length === 0) {
+        showNotification('Please select at least one product image', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    try {
+        // Upload all images to Cloudinary
+        const imageUrls = await uploadAllImages();
+        
+        if (imageUrls.length === 0) {
+            showNotification('Failed to upload images. Please try again.', 'error');
+            setButtonLoading(addBtn, false);
+            return;
+        }
+        
+        // Store first image URL for backward compatibility
+        const imageUrl = imageUrls[0];
+        
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "addProduct",
+                name: name,
+                price: Number(price),
+                description: desc,
+                imageUrl: imageUrl,
+                imageUrls: imageUrls, // Send all image URLs
+                sizes: sizes,
+                category: category
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Product added successfully with images!', 'success');
+            
+            // Clear form
+            document.getElementById('pname').value = '';
+            document.getElementById('pprice').value = '';
+            document.getElementById('pdesc').value = '';
+            document.getElementById('pcategory').value = '';
+            
+            // Reset checkboxes to default (only M checked)
+            document.querySelectorAll('#sizeCheckboxGroup input[type="checkbox"]').forEach(cb => {
+                cb.checked = cb.value === 'M';
+            });
+            updateSelectedSizesDisplay();
+            
+            // Reset image upload
+            resetImageUpload();
+            
+            loadProducts();
+        } else {
+            showNotification('Error adding product', 'error');
+        }
+    } catch (error) {
+        console.error('Error adding product:', error);
+        showNotification('Error adding product', 'error');
+    } finally {
+        setButtonLoading(addBtn, false);
+    }
+}function renderAdminAllProducts() {
+    const container = document.getElementById('adminAllProductsGrid');
+    if (!container) return;
+    
+    const filteredProducts = selectedCategory === 'all' ? allProducts : allProducts.filter(p => p[6] === selectedCategory);
+    document.getElementById('allProductsCount').textContent = `${filteredProducts.length} products`;
+    
+    if (filteredProducts.length === 0) {
+        container.innerHTML = `<div class="no-products" style="text-align: center; padding: 3rem;">
+            <i class="fas fa-box-open" style="font-size: 4rem; color: var(--gray); margin-bottom: 1rem;"></i>
+            <h3>No Products Found</h3>
+            <p>Try adjusting your search or filter</p>
+        </div>`;
+        return;
+    }
+    
+    container.innerHTML = filteredProducts.map(product => {
+        let sizes = ['M']; try { if (product[5]) sizes = JSON.parse(product[5]); } catch(e) {}
+        let imgUrl = product[4] || '';
+        let imageCount = 0;
+        try {
+            if (product[9] && typeof product[9] === 'string') {
+                const images = JSON.parse(product[9]);
+                imageCount = images.length;
+                if (images && images.length > 0) imgUrl = images[0];
+            } else if (product[7] && typeof product[7] === 'string') {
+                const images = JSON.parse(product[7]);
+                imageCount = images.length;
+                if (images && images.length > 0) imgUrl = images[0];
+            }
+        } catch(e) {}
+        
+        const sellOnline = product[8] === true || product[8] === 'true' || product[8] === 1;
+        const productData = { 
+            id: product[0], name: product[1], price: product[2], desc: product[3], 
+            imageUrl: imgUrl, sizes: sizes, category: product[6] || '', sell_online: sellOnline 
+        };
+        
+        return `<div class="product-card" data-selling="${sellOnline}">
+            <div class="product-img" style="${imgUrl ? `background-image: url('${imgUrl}')` : ''}" onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">
+                ${product[6] ? `<span class="product-category">${product[6]}</span>` : ''}
+                ${sellOnline ? `<span class="sell-badge"><i class="fas fa-globe"></i> Sell Online</span>` : ''}
+                ${imageCount > 1 ? `<span class="image-count-badge"><i class="fas fa-images"></i> ${imageCount}</span>` : ''}
+                ${!imgUrl ? `<i class="fas fa-box product-img-placeholder"></i>` : ''}
+            </div>
+            <div class="product-info">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 class="product-name" onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">${product[1]}</h3>
+                    <label class="sell-toggle">
+                        <input type="checkbox" ${sellOnline ? 'checked' : ''} onchange="toggleSellOnline('${product[0]}', this.checked)">
+                        <span class="sell-toggle-slider"></span>
+                    </label>
+                </div>
+                <p class="product-desc">${product[3] || 'No description available'}</p>
+                <div class="product-price">₹${product[2]}</div>
+                <div class="size-badge" style="margin: 10px 0;">Available Sizes: ${sizes.join(', ')}</div>
+                <div style="display: flex; gap: 10px; margin-top: 1rem;">
+                    <button class="btn btn-success" onclick="toggleEditModal('${product[0]}')" style="flex: 1;"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="btn btn-danger" onclick="deleteProduct('${product[0]}')" style="flex: 1;"><i class="fas fa-trash"></i> Delete</button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// Variables for gallery navigation
+let currentImageIndex = 0;
+let currentGalleryImages = [];
+
+// Function to change gallery image with arrow navigation
+function changeGalleryImage(index, imageUrl) {
+    if (index < 0) index = 0;
+    if (index >= currentGalleryImages.length) index = currentGalleryImages.length - 1;
+    
+    currentImageIndex = index;
+    const mainImage = document.getElementById('galleryMainImage');
+    if (mainImage) {
+        mainImage.src = currentGalleryImages[currentImageIndex];
+        
+        // Update active thumbnail
+        document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+            if (i === currentImageIndex) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+        
+        // Update counter
+        const counter = document.getElementById('galleryImageCounter');
+        if (counter) {
+            counter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
+        }
+    }
+}
+
+// Next image function
+function nextGalleryImage() {
+    if (currentGalleryImages.length === 0) return;
+    let nextIndex = currentImageIndex + 1;
+    if (nextIndex >= currentGalleryImages.length) {
+        nextIndex = 0; // Loop back to first
+    }
+    changeGalleryImage(nextIndex, currentGalleryImages[nextIndex]);
+}
+
+// Previous image function
+function prevGalleryImage() {
+    if (currentGalleryImages.length === 0) return;
+    let prevIndex = currentImageIndex - 1;
+    if (prevIndex < 0) {
+        prevIndex = currentGalleryImages.length - 1; // Loop to last
+    }
+    changeGalleryImage(prevIndex, currentGalleryImages[prevIndex]);
+}
+
+// Updated openFullScreenProduct function with arrow navigation
+function openFullScreenProduct(productData) {
+    let product = typeof productData === 'string' ? JSON.parse(productData) : productData;
+    
+    const sellOnline = product.sell_online === true || product.sell_online === 'true' || product.sell_online === 1;
+    
+    let availableSizes = ['M'];
+    try { 
+        if (product.sizes) availableSizes = typeof product.sizes === 'string' ? JSON.parse(product.sizes) : product.sizes; 
+    } catch(e) {}
+    
+    let sizeButtonsHTML = availableSizes.map(size => `<button class="size-btn" onclick="selectFullScreenSize(this, '${size}')">${size}</button>`).join('');
+    
+    const modal = document.getElementById('fullScreenProductModal');
+    const content = document.getElementById('fullScreenProductContent');
+    
+    // Get all images
+    let allImages = [];
+    if (product.imageUrls && product.imageUrls.length > 0) {
+        allImages = product.imageUrls;
+    } else if (product.imageUrl) {
+        allImages = [product.imageUrl];
+    }
+    
+    // Store globally for navigation
+    currentGalleryImages = allImages;
+    currentImageIndex = 0;
+    
+    // Create gallery HTML with arrows
+    let galleryHTML = '';
+    if (allImages.length > 0) {
+        const arrowsHTML = allImages.length > 1 ? `
+            <button class="gallery-nav-arrow prev" onclick="prevGalleryImage()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav-arrow next" onclick="nextGalleryImage()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="gallery-image-counter" id="galleryImageCounter">
+                1 / ${allImages.length}
+            </div>
+        ` : '';
+        
+        galleryHTML = `
+            <div class="full-screen-gallery">
+                <div class="gallery-main-image">
+                    <img id="galleryMainImage" src="${allImages[0]}" alt="${product.name}">
+                    ${arrowsHTML}
+                </div>
+                <div class="gallery-thumbnails">
+                    ${allImages.map((img, idx) => `
+                        <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" onclick="changeGalleryImage(${idx}, '${img}')">
+                            <img src="${img}" alt="Thumb ${idx + 1}">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        galleryHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-box" style="font-size: 8rem; color: var(--primary); opacity: 0.3;"></i></div>`;
+    }
+    
+    const addToCartButton = sellOnline ? 
+        `<button class="btn btn-primary" onclick="addToCartFromFullScreen()"><i class="fas fa-cart-plus"></i> Add to Cart</button>` : 
+        `<button class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;"><i class="fas fa-store"></i> Not Available Online</button>`;
+    
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #2e7d32;"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #999;"><i class="fas fa-store"></i> Store Pickup Only</span>`;
+    
+    content.innerHTML = `
+        <div class="full-screen-product">
+            <div class="full-screen-image">
+                ${galleryHTML}
+            </div>
+            <div class="full-screen-details">
+                ${sellBadge}
+                ${product.category ? `<span class="full-screen-category">${product.category}</span>` : ''}
+                <h2>${product.name}</h2>
+                <div class="full-screen-price">₹${product.price}</div>
+                <div class="full-screen-description">${product.desc || 'No description available for this product.'}</div>
+                <div class="full-screen-sizes">
+                    <h3><i class="fas fa-tshirt"></i> Select Size</h3>
+                    <div class="size-buttons" id="fullScreenSizeButtons">${sizeButtonsHTML}</div>
+                </div>
+                <div class="full-screen-actions">
+                    ${addToCartButton}
+                    <button class="btn btn-secondary" onclick="closeFullScreenProduct()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    window.currentFullScreenProduct = product;
+    window.currentFullScreenSize = availableSizes[0] || 'M';
+    window.currentFullScreenSellOnline = sellOnline;
+    
+    setTimeout(() => { 
+        const firstSizeBtn = document.querySelector('#fullScreenSizeButtons .size-btn'); 
+        if (firstSizeBtn) firstSizeBtn.classList.add('selected'); 
+    }, 100);
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Add keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('fullScreenProductModal');
+    if (modal && modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') {
+            prevGalleryImage();
+        } else if (e.key === 'ArrowRight') {
+            nextGalleryImage();
+        } else if (e.key === 'Escape') {
+            closeFullScreenProduct();
+        }
+    }
+});
+
+// Also add touch swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', function(e) {
+    const modal = document.getElementById('fullScreenProductModal');
+    if (modal && modal.style.display === 'flex') {
+        touchStartX = e.changedTouches[0].screenX;
+    }
+});
+
+document.addEventListener('touchend', function(e) {
+    const modal = document.getElementById('fullScreenProductModal');
+    if (modal && modal.style.display === 'flex') {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const difference = touchStartX - touchEndX;
+    
+    if (Math.abs(difference) > swipeThreshold) {
+        if (difference > 0) {
+            // Swipe left - next image
+            nextGalleryImage();
+        } else {
+            // Swipe right - previous image
+            prevGalleryImage();
         }
     }
 }
