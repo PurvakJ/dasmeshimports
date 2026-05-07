@@ -11127,6 +11127,1042 @@ input:checked + .sell-toggle-slider {
     color: white;
 }
 
+/* Fix icon alignment in input fields */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.input-with-icon input {
+    padding-left: 48px;
+    padding-right: 48px;
+    width: 100%;
+}
+
+/* Password toggle button styles */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray);
+    z-index: 2;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--primary);
+}
+
+.password-toggle:focus {
+    outline: none;
+}
+
+/* Ensure input has proper padding for both icon and toggle */
+.input-with-icon input {
+    padding-left: 48px;
+    padding-right: 48px;
+}
+
+/* Adjust for mobile */
+@media (max-width: 768px) {
+    .password-toggle {
+        right: 12px;
+        padding: 6px;
+    }
+    
+    .input-with-icon input {
+        padding-left: 44px;
+        padding-right: 44px;
+    }
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray);
+    z-index: 10;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+    pointer-events: auto; /* Ensure button is clickable */
+}
+
+.password-toggle:hover {
+    color: var(--primary);
+}
+
+.password-toggle:focus {
+    outline: none;
+}
+
+.password-toggle i {
+    pointer-events: none; /* Icon doesn't block clicks */
+}
+
+/* Fix icon alignment in input fields */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.input-with-icon input {
+    padding-left: 48px;
+    padding-right: 56px; /* Increased to give more space for eye button */
+    width: 100%;
+}
+
+/* Password toggle button styles - FIXED */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray);
+    z-index: 10;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+.password-toggle i {
+    font-size: 1.1rem;
+    pointer-events: none; /* Icon itself doesn't block clicks */
+}
+
+.password-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--primary);
+}
+
+.password-toggle:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.password-toggle:focus {
+    outline: none;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Ensure the button area is fully clickable */
+.password-toggle::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: transparent;
+}
+
+/* For mobile devices - increase touch area */
+@media (max-width: 768px) {
+    .password-toggle {
+        width: 44px;
+        height: 44px;
+        right: 8px;
+    }
+    
+    .password-toggle i {
+        font-size: 1rem;
+    }
+    
+    .input-with-icon input {
+        padding-right: 60px;
+    }
+}
+
+/* WhatsApp Contact Cards Styles */
+.whatsapp-card {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.whatsapp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.1) 0%, rgba(37, 211, 102, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-card:hover::before {
+    opacity: 1;
+}
+
+.whatsapp-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    border-color: #25D366;
+}
+
+.whatsapp-icon {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.whatsapp-icon i {
+    font-size: 3rem;
+    color: #25D366;
+    background: white;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-card:hover .whatsapp-icon i {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-card h3 {
+    font-size: 1.3rem;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.whatsapp-card p {
+    color: var(--dark-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.whatsapp-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #25D366;
+    margin: 0.75rem 0;
+    padding: 0.5rem;
+    background: rgba(37, 211, 102, 0.1);
+    border-radius: 50px;
+    display: inline-block;
+    width: auto;
+    text-align: center;
+}
+
+.whatsapp-card .testimonial-stars {
+    color: #25D366;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* Pulse animation for WhatsApp icon */
+@keyframes whatsappPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    }
+}
+
+.whatsapp-card .whatsapp-icon i {
+    animation: whatsappPulse 2s ease-in-out infinite;
+}
+
+.whatsapp-card:hover .whatsapp-icon i {
+    animation: none;
+}
+
+/* Responsive for WhatsApp cards */
+@media (max-width: 768px) {
+    .whatsapp-icon i {
+        font-size: 2.5rem;
+        padding: 12px;
+    }
+    
+    .whatsapp-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .whatsapp-card p {
+        font-size: 0.8rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-icon i {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    
+    .whatsapp-card h3 {
+        font-size: 1rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.8rem;
+    }
+}
+
+/* Static Info Section in Full Screen Modal */
+.full-screen-static-info {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--primary-light);
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    color: var(--dark-light);
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row i {
+    width: 30px;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.info-row strong {
+    color: var(--dark);
+    min-width: 130px;
+}
+
+.info-row .info-content {
+    flex: 1;
+}
+
+.delivery-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.no-return {
+    color: var(--danger);
+}
+
+.assistance-phone {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .info-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .info-row strong {
+        min-width: 100px;
+    }
+    
+    .info-row i {
+        width: 25px;
+    }
+}
+
+/* Full Width WhatsApp Section */
+.testimonials-section {
+    background: linear-gradient(145deg, #fffaf5, #fff7f0);
+    padding: 3rem 0;
+    margin: 3rem 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    border-radius: 0;
+    overflow-x: hidden;
+}
+
+.testimonials-section .section-title {
+    max-width: 1400px;
+    margin: 0 auto 2rem auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+/* WhatsApp Contact Container - Full Width */
+.whatsapp-contact-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.testimonial-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* WhatsApp Card - Full Width Responsive */
+.whatsapp-card {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* For Multiple Cards - Responsive Grid */
+@media (min-width: 1200px) {
+    .testimonial-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .whatsapp-card {
+        flex: 0 0 calc(33.333% - 1.5rem);
+        max-width: calc(33.333% - 1.5rem);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .testimonial-container {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .whatsapp-card {
+        flex: 0 0 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 767px) {
+    .testimonials-section {
+        padding: 2rem 0;
+    }
+    
+    .testimonials-section .section-title {
+        padding: 0 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .whatsapp-contact-wrapper {
+        padding: 0 1rem;
+    }
+    
+    .testimonial-container {
+        gap: 1rem;
+    }
+    
+    .whatsapp-card {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+/* WhatsApp Card Styling */
+.whatsapp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.1) 0%, rgba(37, 211, 102, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-card:hover::before {
+    opacity: 1;
+}
+
+.whatsapp-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    border-color: #25D366;
+}
+
+.whatsapp-icon {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.whatsapp-icon i {
+    font-size: 3rem;
+    color: #25D366;
+    background: white;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-card:hover .whatsapp-icon i {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-card h3 {
+    font-size: 1.3rem;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.whatsapp-card p {
+    color: var(--dark-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.whatsapp-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #25D366;
+    margin: 0.75rem 0;
+    padding: 0.5rem;
+    background: rgba(37, 211, 102, 0.1);
+    border-radius: 50px;
+    display: inline-block;
+    width: auto;
+    text-align: center;
+}
+
+.whatsapp-card .testimonial-stars {
+    color: #25D366;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Pulse animation for WhatsApp icon */
+@keyframes whatsappPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    }
+}
+
+.whatsapp-card .whatsapp-icon i {
+    animation: whatsappPulse 2s ease-in-out infinite;
+}
+
+.whatsapp-card:hover .whatsapp-icon i {
+    animation: none;
+}
+
+/* Responsive for WhatsApp cards */
+@media (max-width: 768px) {
+    .whatsapp-icon i {
+        font-size: 2.5rem;
+        padding: 12px;
+    }
+    
+    .whatsapp-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .whatsapp-card p {
+        font-size: 0.8rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-icon i {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    
+    .whatsapp-card h3 {
+        font-size: 1rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.8rem;
+    }
+}
+
+/* Full width adjustment for all sections */
+.hero-carousel,
+.testimonials-section,
+.feature-callout {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.hero-carousel {
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.testimonials-section {
+    border-radius: 0;
+}
+
+.feature-callout {
+    border-radius: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-carousel,
+    .testimonials-section,
+    .feature-callout {
+        width: 100vw;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+    
+    .stats-bar {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+.whatsapp-contact-wrappe{
+    width: 100%;
+}
+
+/* Make WhatsApp section full width - breaking out of container */
+.testimonials-section {
+    background: linear-gradient(145deg, #fffaf5, #fff7f0);
+    padding: 3rem 0;
+    margin: 3rem 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    border-radius: 0;
+    overflow-x: hidden;
+}
+
+.testimonials-section .section-title {
+    max-width: 1400px;
+    margin: 0 auto 2rem auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+/* WhatsApp Contact Container - Full Width */
+.whatsapp-contact-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.testimonial-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* WhatsApp Card - Centered */
+.whatsapp-card {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* For multiple cards - keep them centered */
+@media (min-width: 1200px) {
+    .whatsapp-card {
+        flex: 0 0 calc(33.333% - 1.5rem);
+        max-width: calc(33.333% - 1.5rem);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .whatsapp-card {
+        flex: 0 0 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 767px) {
+    .testimonials-section {
+        padding: 2rem 0;
+    }
+    
+    .testimonials-section .section-title {
+        padding: 0 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .whatsapp-contact-wrapper {
+        padding: 0 1rem;
+    }
+    
+    .whatsapp-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Ensure the container doesn't restrict full width */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 120px);
+    position: relative;
+    z-index: 1;
+}
+
+/* Full width adjustment for all sections that need to break out */
+.hero-carousel,
+.testimonials-section,
+.feature-callout {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.hero-carousel {
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.testimonials-section {
+    border-radius: 0;
+}
+
+.feature-callout {
+    border-radius: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-carousel,
+    .testimonials-section,
+    .feature-callout {
+        width: 100vw;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+    
+    .stats-bar {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+/* Full Width WhatsApp Section - New Clean Classes */
+.whatsapp-full-section {
+    background: linear-gradient(145deg, #fffaf5, #fff7f0);
+    padding: 3rem 0;
+    margin: 3rem 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    border-radius: 0;
+    overflow-x: hidden;
+}
+
+.whatsapp-full-section .section-title {
+    max-width: 1400px;
+    margin: 0 auto 2rem auto;
+    padding: 0 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.whatsapp-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.whatsapp-cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* WhatsApp Contact Card */
+.whatsapp-contact-card {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    background: white;
+    border-radius: var(--radius-lg, 1rem);
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e8dfd7;
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.whatsapp-contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.1) 0%, rgba(37, 211, 102, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-contact-card:hover::before {
+    opacity: 1;
+}
+
+.whatsapp-contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    border-color: #25D366;
+}
+
+.whatsapp-icon {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.whatsapp-icon i {
+    font-size: 3rem;
+    color: #25D366;
+    background: white;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-contact-card:hover .whatsapp-icon i {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-contact-card h3 {
+    font-size: 1.3rem;
+    color: #3e2c23;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.whatsapp-contact-card p {
+    color: #6b5a4a;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.whatsapp-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #25D366;
+    margin: 0.75rem 0;
+    padding: 0.5rem;
+    background: rgba(37, 211, 102, 0.1);
+    border-radius: 50px;
+    display: inline-block;
+    width: auto;
+    text-align: center;
+}
+
+.response-stars {
+    color: #25D366;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Pulse animation for WhatsApp icon */
+@keyframes whatsappPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    }
+}
+
+.whatsapp-contact-card .whatsapp-icon i {
+    animation: whatsappPulse 2s ease-in-out infinite;
+}
+
+.whatsapp-contact-card:hover .whatsapp-icon i {
+    animation: none;
+}
+
+/* Responsive for multiple cards */
+@media (min-width: 1200px) {
+    .whatsapp-contact-card {
+        flex: 0 0 calc(33.333% - 1.5rem);
+        max-width: calc(33.333% - 1.5rem);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .whatsapp-contact-card {
+        flex: 0 0 calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 767px) {
+    .whatsapp-full-section {
+        padding: 2rem 0;
+    }
+    
+    .whatsapp-full-section .section-title {
+        padding: 0 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .whatsapp-wrapper {
+        padding: 0 1rem;
+    }
+    
+    .whatsapp-contact-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .whatsapp-icon i {
+        font-size: 2.5rem;
+        padding: 12px;
+    }
+    
+    .whatsapp-contact-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-icon i {
+        font-size: 2rem;
+        padding: 10px;
+    }
+    
+    .whatsapp-contact-card h3 {
+        font-size: 1rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.8rem;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -11218,7 +12254,7 @@ input:checked + .sell-toggle-slider {
     </header>
     <!-- Floating Social Buttons -->
 <div class="floating-social-buttons">
-    <a href="https://wa.me/9194191940?text=Hello%20Dasmesh%20Imports,%20I%20have%20a%20query%20about%20your%20products" 
+    <a href="https://whatsapp.com/channel/0029Vb7CmRj6mYPUIefNR32h" 
        class="floating-social-btn whatsapp" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
@@ -11366,12 +12402,24 @@ input:checked + .sell-toggle-slider {
                 </div>
             </div>
         
-            <div class="testimonials-section">
-                <h2 class="section-title"><i class="fas fa-comment-dots"></i> What Our Customers Say</h2>
-                <div class="testimonial-container" id="testimonialCarousel">
-                    <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p>"Absolutely love the quality! They never disappoints."</p><div class="testimonial-author">— Priya S.</div></div>
-                    <div class="testimonial-card"><div class="testimonial-stars">★★★★½</div><p>"Fast delivery and great service. Highly recommended!"</p><div class="testimonial-author">— Aditya Mehta</div></div>
-                    <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p>"Unique pieces I can't find elsewhere. Will shop again."</p><div class="testimonial-author">— Natasha K.</div></div>
+            <div class="whatsapp-full-section">
+                <div class="whatsapp-full-width-container">
+                    <h2 class="section-title"><i class="fab fa-whatsapp"></i> Connect With Us on WhatsApp</h2>
+                    <div class="whatsapp-wrapper-full">
+                        <div class="whatsapp-cards-container-full" id="whatsappContactContainer">
+                            <div class="whatsapp-contact-card whatsapp-card-expanded" onclick="openWhatsApp('9194191940', 'Hello Dasmesh Imports, I am interested in your furniture products. Can you please share more details?')">
+                                <div class="whatsapp-icon-large">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <h3>Sales & Support</h3>
+                                <p>Get instant replies for product inquiries, pricing, and availability</p>
+                                <div class="whatsapp-number">📞 91941-91940</div>
+                                <div class="response-stars">
+                                    <i class="fas fa-clock"></i> ✉️ Response within minutes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         
@@ -11701,6 +12749,9 @@ input:checked + .sell-toggle-slider {
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="password" placeholder="Enter your password">
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility(event, 'password')">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
                         </div>
                     </div>
                     <button class="btn btn-primary" onclick="login()" style="width: 100%;">
@@ -11725,6 +12776,9 @@ input:checked + .sell-toggle-slider {
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="signupPassword" placeholder="Create a password">
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility(event, 'signupPassword')">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -11732,6 +12786,9 @@ input:checked + .sell-toggle-slider {
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
                             <input type="password" id="signupConfirmPassword" placeholder="Confirm your password">
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility(event, 'signupConfirmPassword')">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
                         </div>
                     </div>
                     <button class="btn btn-primary" onclick="signup()" style="width: 100%;">
@@ -11856,7 +12913,8 @@ input:checked + .sell-toggle-slider {
         </div>
     </div>
 
-    <!-- Change Password Modal -->
+<!-- Change Password Modal -->
+<!-- Change Password Modal -->
 <div id="changePasswordModal" class="modal">
     <div class="modal-content">
         <button class="close-modal" onclick="toggleChangePasswordModal()">&times;</button>
@@ -11869,6 +12927,9 @@ input:checked + .sell-toggle-slider {
                 <div class="input-with-icon">
                     <i class="fas fa-lock"></i>
                     <input type="password" id="currentPassword" placeholder="Enter current password" class="form-control">
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility(event, 'currentPassword')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
                 </div>
             </div>
             <div class="form-group">
@@ -11876,6 +12937,9 @@ input:checked + .sell-toggle-slider {
                 <div class="input-with-icon">
                     <i class="fas fa-key"></i>
                     <input type="password" id="newPassword" placeholder="Enter new password" class="form-control">
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility(event, 'newPassword')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
                 </div>
                 <small>Password must be at least 6 characters long</small>
             </div>
@@ -11884,6 +12948,9 @@ input:checked + .sell-toggle-slider {
                 <div class="input-with-icon">
                     <i class="fas fa-check-circle"></i>
                     <input type="password" id="confirmNewPassword" placeholder="Confirm new password" class="form-control">
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility(event, 'confirmNewPassword')">
+                        <i class="fas fa-eye-slash"></i>
+                    </button>
                 </div>
             </div>
             <button class="btn btn-primary" onclick="changePassword()" style="width: 100%;">
@@ -11892,7 +12959,6 @@ input:checked + .sell-toggle-slider {
         </div>
     </div>
 </div>
-
 
 
     <footer class="site-footer">
@@ -15712,6 +16778,364 @@ function updateAuthUI() {
         mobileChangePasswordBtn.style.display = 'none';
     }
 }
+
+// Toggle password visibility
+function togglePasswordVisibility(inputId, buttonElement) {
+    const input = document.getElementById(inputId);
+    const icon = buttonElement.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+
+// Also add this for the change password modal toggle if not already added
+// The same function works for all password fields
+
+// Change Password Function
+async function changePassword() {
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+    
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    if (newPassword.length < 6) {
+        showNotification('New password must be at least 6 characters long', 'error');
+        return;
+    }
+    
+    if (newPassword !== confirmNewPassword) {
+        showNotification('New passwords do not match', 'error');
+        return;
+    }
+    
+    const changePwdBtn = document.querySelector('#changePasswordModal .btn-primary');
+    setButtonLoading(changePwdBtn, true);
+    
+    try {
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "changePassword",
+                email: user,
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Password changed successfully! Please login again.', 'success');
+            toggleChangePasswordModal();
+            
+            // Clear password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmNewPassword').value = '';
+            
+            // Logout user after password change
+            setTimeout(() => {
+                logout();
+            }, 2000);
+        } else {
+            showNotification(data.error || 'Failed to change password', 'error');
+        }
+    } catch (error) {
+        console.error('Error changing password:', error);
+        showNotification('Error changing password', 'error');
+    } finally {
+        setButtonLoading(changePwdBtn, false);
+    }
+}
+
+// Toggle Change Password Modal
+function toggleChangePasswordModal() {
+    const modal = document.getElementById('changePasswordModal');
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        // Clear form fields
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmNewPassword').value = '';
+    } else {
+        modal.style.display = 'flex';
+    }
+}
+
+// Toggle password visibility - Fixed version
+function togglePasswordVisibility(inputId, buttonElement) {
+    const input = document.getElementById(inputId);
+    
+    if (!input) {
+        console.error('Input element not found:', inputId);
+        return;
+    }
+    
+    // Find the icon within the button
+    const icon = buttonElement.querySelector('i');
+    
+    if (!icon) {
+        console.error('Icon not found in button');
+        return;
+    }
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+
+// Alternative: Pass event object
+function togglePasswordVisibility(event, inputId) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const input = document.getElementById(inputId);
+    
+    if (!input) {
+        console.error('Input element not found:', inputId);
+        return;
+    }
+    
+    const icon = button.querySelector('i');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+
+// Toggle password visibility - Working version
+function togglePasswordVisibility(event, inputId) {
+    // Prevent default button behavior
+    if (event) {
+        event.preventDefault();
+    }
+    
+    // Get the button that was clicked
+    const button = event ? event.currentTarget : event;
+    // Get the input element
+    const input = document.getElementById(inputId);
+    
+    if (!input) {
+        console.error('Input element not found:', inputId);
+        return;
+    }
+    
+    // Find the icon within the button
+    const icon = button.querySelector('i');
+    
+    if (!icon) {
+        console.error('Icon not found in button');
+        return;
+    }
+    
+    // Toggle password visibility
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+
+// For backward compatibility, also keep the original function signature
+window.togglePasswordVisibility = togglePasswordVisibility;
+
+// Open WhatsApp chat with pre-filled message
+function openWhatsApp(phoneNumber, message) {
+    // Remove any non-numeric characters from phone number
+    const cleanNumber = phoneNumber.replace(/\D/g, '');
+    
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Create WhatsApp URL (works on both mobile and desktop)
+    const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
+    
+    // Open in new tab
+    window.open(whatsappUrl, '_blank');
+}
+
+// Updated openFullScreenProduct function with static info
+function openFullScreenProduct(productData) {
+    let product = typeof productData === 'string' ? JSON.parse(productData) : productData;
+    
+    const sellOnline = product.sell_online === true || product.sell_online === 'true' || product.sell_online === 1;
+    
+    let availableSizes = ['M'];
+    try { 
+        if (product.sizes) availableSizes = typeof product.sizes === 'string' ? JSON.parse(product.sizes) : product.sizes; 
+    } catch(e) {}
+    
+    let sizeButtonsHTML = availableSizes.map(size => `<button class="size-btn" onclick="selectFullScreenSize(this, '${size}')">${size}</button>`).join('');
+    
+    const modal = document.getElementById('fullScreenProductModal');
+    const content = document.getElementById('fullScreenProductContent');
+    
+    // Get all images
+    let allImages = [];
+    if (product.imageUrls && product.imageUrls.length > 0) {
+        allImages = product.imageUrls;
+    } else if (product.imageUrl) {
+        allImages = [product.imageUrl];
+    }
+    
+    // Store globally for navigation
+    currentGalleryImages = allImages;
+    currentImageIndex = 0;
+    
+    // Create gallery HTML with arrows
+    let galleryHTML = '';
+    if (allImages.length > 0) {
+        const arrowsHTML = allImages.length > 1 ? `
+            <button class="gallery-nav-arrow prev" onclick="prevGalleryImage()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav-arrow next" onclick="nextGalleryImage()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="gallery-image-counter" id="galleryImageCounter">
+                1 / ${allImages.length}
+            </div>
+        ` : '';
+        
+        galleryHTML = `
+            <div class="full-screen-gallery">
+                <div class="gallery-main-image">
+                    <img id="galleryMainImage" src="${allImages[0]}" alt="${product.name}">
+                    ${arrowsHTML}
+                </div>
+                <div class="gallery-thumbnails">
+                    ${allImages.map((img, idx) => `
+                        <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" onclick="changeGalleryImage(${idx}, '${img}')">
+                            <img src="${img}" alt="Thumb ${idx + 1}">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        galleryHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-box" style="font-size: 8rem; color: var(--primary); opacity: 0.3;"></i></div>`;
+    }
+    
+    // Price HTML with strike-through
+    let priceHTML = '';
+    if (product.originalPrice && product.originalPrice > 0) {
+        priceHTML = `
+            <div class="full-screen-price-wrapper">
+                <span class="full-screen-original-price">₹${product.originalPrice}</span>
+                <span class="full-screen-actual-price">₹${product.price}</span>
+            </div>
+        `;
+    } else {
+        priceHTML = `<div class="full-screen-price">₹${product.price}</div>`;
+    }
+    
+    const addToCartButton = sellOnline ? 
+        `<button class="btn btn-primary" onclick="addToCartFromFullScreen()"><i class="fas fa-cart-plus"></i> Add to Cart</button>` : 
+        `<button class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;"><i class="fas fa-store"></i> Not Available Online</button>`;
+    
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #2e7d32;"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #999;"><i class="fas fa-store"></i> Store Pickup Only</span>`;
+    
+    // Stock info HTML
+    const stock = product.stock || 0;
+    const stockHTML = `
+        <div class="stock-info" style="margin: 0.5rem 0; text-align: center;">
+            <i class="fas fa-boxes"></i> ${stock > 0 ? `${stock} units available` : 'Out of Stock'}
+        </div>
+    `;
+    
+    content.innerHTML = `
+        <div class="full-screen-product">
+            <div class="full-screen-image">
+                ${galleryHTML}
+            </div>
+            <div class="full-screen-details">
+                ${sellBadge}
+                ${product.category ? `<span class="full-screen-category">${product.category}</span>` : ''}
+                <h2>${product.name}</h2>
+                ${priceHTML}
+                ${stockHTML}
+                <div class="full-screen-description">${product.desc || 'No description available for this product.'}</div>
+                <div class="full-screen-sizes">
+                    <h3><i class="fas fa-tshirt"></i> Select Size</h3>
+                    <div class="size-buttons" id="fullScreenSizeButtons">${sizeButtonsHTML}</div>
+                </div>
+                
+                <!-- Static Information Section -->
+                <div class="full-screen-static-info">
+                    <div class="info-row">
+                        <i class="fas fa-truck"></i>
+                        <strong>Estimated Delivery</strong>
+                        <span class="info-content">4 to 10 business days <span class="delivery-badge">Pan India</span></span>
+                    </div>
+                    <div class="info-row">
+                        <i class="fas fa-shipping-fast"></i>
+                        <strong>Shipping</strong>
+                        <span class="info-content">Ships across India. Delivery charges applicable based on your pincode address.</span>
+                    </div>
+                    <div class="info-row">
+                        <i class="fas fa-exchange-alt"></i>
+                        <strong>Return Policy</strong>
+                        <span class="info-content no-return"><i class="fas fa-times-circle"></i> No guarantee warranty & return policy available on this product</span>
+                    </div>
+                    <div class="info-row">
+                        <i class="fas fa-headset"></i>
+                        <strong>Need Assistance?</strong>
+                        <span class="info-content">Contact us at <strong class="assistance-phone">📱 91941-91940</strong> or <strong>☎️ 01652 291946</strong></span>
+                        <<span class="info-content">Subject To Mansa Jurisdiction</strong></span>
+                    </div>
+                </div>
+                
+                <div class="full-screen-actions">
+                    ${addToCartButton}
+                    <button class="btn btn-secondary" onclick="closeFullScreenProduct()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    window.currentFullScreenProduct = product;
+    window.currentFullScreenSize = availableSizes[0] || 'M';
+    window.currentFullScreenSellOnline = sellOnline;
+    
+    setTimeout(() => { 
+        const firstSizeBtn = document.querySelector('#fullScreenSizeButtons .size-btn'); 
+        if (firstSizeBtn) firstSizeBtn.classList.add('selected'); 
+    }, 100);
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+
     </script>
 </body>
 </html>
