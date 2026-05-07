@@ -10706,6 +10706,406 @@ input:checked + .sell-toggle-slider {
         transform: translateY(-50%) scale(0.95);
     }
 }
+
+/* Logo size increase */
+.logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.logo span {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        width: 45px;
+        height: 45px;
+    }
+    .logo span {
+        font-size: 1.1rem;
+    }
+}
+
+/* Floating Social Buttons */
+.floating-social-buttons {
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.floating-social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.5s ease;
+}
+
+.floating-social-btn:hover {
+    transform: scale(1.1) translateX(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Original brand colors */
+.floating-social-btn.whatsapp {
+    background: #25D366;
+}
+
+.floating-social-btn.whatsapp:hover {
+    background: #128C7E;
+}
+
+.floating-social-btn.instagram {
+    background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
+}
+
+.floating-social-btn.instagram:hover {
+    background: linear-gradient(45deg, #d62976, #962fbf, #f09433);
+}
+
+.floating-social-btn.facebook {
+    background: #1877F2;
+}
+
+.floating-social-btn.facebook:hover {
+    background: #0D6DDB;
+}
+
+.floating-social-btn.location {
+    background: #34B7F1;
+}
+
+.floating-social-btn.location:hover {
+    background: #1E88E5;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-social-buttons {
+        right: 15px;
+        bottom: 80px;
+        gap: 10px;
+    }
+    
+    .floating-social-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Selected payment option color */
+.payment-option.selected {
+    border-color: #2e7d32;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.1) 0%, rgba(27, 94, 32, 0.05) 100%);
+}
+
+.payment-option.selected i {
+    color: #2e7d32;
+}
+
+/* Product price with original price strike-through */
+.product-price-wrapper {
+    margin: 0.5rem 0;
+}
+
+.product-original-price {
+    font-size: 0.9rem;
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.product-actual-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.full-screen-price-wrapper {
+    margin: 1rem 0;
+}
+
+.full-screen-original-price {
+    font-size: 1.2rem;
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.full-screen-actual-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Stock quantity display */
+.stock-info {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 5px 0;
+}
+
+.stock-info i {
+    margin-right: 5px;
+}
+
+.stock-info.out-of-stock {
+    color: var(--danger);
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius);
+    text-align: center;
+}
+
+/* Footer Social Links with Original Brand Colors */
+.site-footer {
+    background: #2a241f;
+    color: #e5d5c0;
+    text-align: center;
+    padding: 2.5rem 2rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
+    color: #e5d5c0;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    font-family: 'Cormorant Garamond', serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-link i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Location link - Original red/map color */
+.location-link:hover {
+    color: #34B7F1;
+}
+.location-link:hover i {
+    color: #34B7F1;
+    transform: translateY(-3px);
+}
+
+/* WhatsApp link - Original WhatsApp Green */
+.whatsapp-link:hover {
+    color: #25D366;
+}
+.whatsapp-link:hover i {
+    color: #25D366;
+    transform: translateY(-3px);
+}
+
+/* Instagram link - Original Instagram Gradient */
+.instagram-link:hover {
+    color: #E4405F;
+}
+.instagram-link:hover i {
+    background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(-3px);
+}
+
+/* Facebook link - Original Facebook Blue */
+.facebook-link:hover {
+    color: #1877F2;
+}
+.facebook-link:hover i {
+    color: #1877F2;
+    transform: translateY(-3px);
+}
+
+/* For non-hover state, keep icons visible */
+.footer-link i {
+    color: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .footer-link {
+        font-size: 0.85rem;
+    }
+    
+    .footer-link i {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .footer-link {
+        justify-content: center;
+    }
+}
+
+/* Footer Social Links with Original Brand Colors - Always Visible */
+.site-footer {
+    background: #2a241f;
+    color: #e5d5c0;
+    text-align: center;
+    padding: 2.5rem 2rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
+    color: #e5d5c0;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    font-family: 'Cormorant Garamond', serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-link i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Location icon - Map blue */
+.location-link i {
+    color: #34B7F1;
+}
+
+/* WhatsApp icon - Original WhatsApp Green */
+.whatsapp-link i {
+    color: #25D366;
+}
+
+/* Instagram icon - Original Instagram colors via gradient */
+.instagram-link i {
+    background: linear-gradient(45deg, #f09433, #d62976, #962fbf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Facebook icon - Original Facebook Blue */
+.facebook-link i {
+    color: #1877F2;
+}
+
+/* Hover effects */
+.footer-link:hover {
+    color: white;
+    transform: translateX(3px);
+}
+
+.footer-link:hover i {
+    transform: translateY(-3px) scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-links {
+        gap: 1.5rem;
+    }
+    
+    .footer-link {
+        font-size: 0.85rem;
+    }
+    
+    .footer-link i {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .footer-link {
+        justify-content: center;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -10792,6 +11192,25 @@ input:checked + .sell-toggle-slider {
             </div>
         </div>
     </header>
+    <!-- Floating Social Buttons -->
+<div class="floating-social-buttons">
+    <a href="https://wa.me/9194191940?text=Hello%20Dasmesh%20Imports,%20I%20have%20a%20query%20about%20your%20products" 
+       class="floating-social-btn whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.instagram.com/dasmeshimportsmansa" 
+       class="floating-social-btn instagram" target="_blank">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/share/17uC1Gk42v/" 
+       class="floating-social-btn facebook" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://maps.app.goo.gl/kq5hDCceJsPGmNzE7" 
+       class="floating-social-btn location" target="_blank">
+        <i class="fas fa-map-marker-alt"></i>
+    </a>
+</div>
     
     <!-- Mobile Navigation Menu -->
     <div class="mobile-nav" id="mobileNav">
@@ -11076,28 +11495,42 @@ input:checked + .sell-toggle-slider {
             </div>
 
             <!-- Add Product Section with Cloudinary Upload -->
-            <div id="addProductSection" class="admin-section active">
-                <div class="admin-section-header">
-                    <h3><i class="fas fa-plus-circle"></i> Add New Product</h3>
-                    <p class="section-desc">Fill in the details to add a new product to your store</p>
-                </div>
-                <div class="add-product-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fas fa-tag"></i> Product Name *</label>
-                            <input type="text" id="pname" placeholder="e.g., Premium Wireless Headphones" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-rupee-sign"></i> Price (₹) *</label>
-                            <input type="number" id="pprice" placeholder="e.g., 1999" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-align-left"></i> Description</label>
-                        <textarea id="pdesc" placeholder="Enter product description..." class="form-control" rows="4"></textarea>
-                    </div>
-                    
+            <!-- Add Product Section with Multiple Prices and Quantity -->
+<div id="addProductSection" class="admin-section active">
+    <div class="admin-section-header">
+        <h3><i class="fas fa-plus-circle"></i> Add New Product</h3>
+        <p class="section-desc">Fill in the details to add a new product to your store</p>
+    </div>
+    <div class="add-product-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> Product Name *</label>
+                <input type="text" id="pname" placeholder="e.g., Premium Leather Sofa" class="form-control">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-rupee-sign"></i> Our Price (₹) *</label>
+                <input type="number" id="pprice" placeholder="Our selling price" class="form-control">
+                <small>This is the price customers will pay</small>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label><i class="fas fa-tag"></i> Original Price (₹) <span style="color: #999;">(Optional - for strike-through)</span></label>
+            <input type="number" id="poriginalPrice" placeholder="Original MRP" class="form-control">
+            <small>Leave empty if no discount</small>
+        </div>
+        
+        <div class="form-group">
+            <label><i class="fas fa-boxes"></i> Stock Quantity *</label>
+            <input type="number" id="pstock" placeholder="Available quantity" class="form-control" value="10">
+            <small>Number of units available for purchase</small>
+        </div>
+        
+        <div class="form-group">
+            <label><i class="fas fa-align-left"></i> Description</label>
+            <textarea id="pdesc" placeholder="Enter product description..." class="form-control" rows="4"></textarea>
+        </div>
+        
                     <!-- Cloudinary Image Upload Section -->
                     <div class="form-group">
                         <label><i class="fas fa-image"></i> Product Images *</label>
@@ -11287,47 +11720,67 @@ input:checked + .sell-toggle-slider {
     </div>
 
     <!-- Edit Product Modal -->
-    <div id="editProductModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="toggleEditModal()">&times;</button>
-            <div class="modal-header">
-                <h3><i class="fas fa-edit"></i> Edit Product</h3>
+<!-- Edit Product Modal -->
+<div id="editProductModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="toggleEditModal()">&times;</button>
+        <div class="modal-header">
+            <h3><i class="fas fa-edit"></i> Edit Product</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="hidden" id="editProductId">
+                <input type="text" id="editPname" placeholder="Product Name" class="form-control">
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input type="hidden" id="editProductId">
-                    <input type="text" id="editPname" placeholder="Product Name" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="number" id="editPprice" placeholder="Price (₹)" class="form-control">
-                </div>
-                <div class="form-group">
-                    <textarea id="editPdesc" placeholder="Description" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="editPimageUrl" placeholder="Image URL" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Available Sizes</label>
-                    <div class="size-checkbox-group" id="editSizeCheckboxGroup">
-                        <label class="size-checkbox"><input type="checkbox" value="XS"> XS</label>
-                        <label class="size-checkbox"><input type="checkbox" value="S"> S</label>
-                        <label class="size-checkbox"><input type="checkbox" value="M"> M</label>
-                        <label class="size-checkbox"><input type="checkbox" value="L"> L</label>
-                        <label class="size-checkbox"><input type="checkbox" value="XL"> XL</label>
-                        <label class="size-checkbox"><input type="checkbox" value="XXL"> XXL</label>
+            <div class="form-group">
+                <input type="number" id="editPprice" placeholder="Our Price (₹)" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="number" id="editPoriginalPrice" placeholder="Original Price (₹)" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="number" id="editPstock" placeholder="Stock Quantity" class="form-control">
+            </div>
+            <div class="form-group">
+                <textarea id="editPdesc" placeholder="Description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Product Images</label>
+                <div class="image-upload-section">
+                    <div class="file-input-wrapper">
+                        <input type="file" accept="image/*" multiple id="editProductImages" class="file-input">
+                        <label for="editProductImages" class="file-input-label">
+                            <i class="fas fa-cloud-upload-alt"></i> Add More Images
+                        </label>
                     </div>
-                    <div class="selected-sizes" id="editSelectedSizesDisplay"></div>
+                    <div id="editProductImagePreviews" class="image-grid"></div>
+                    <div id="editUploadProgressContainer" style="display: none;" class="uploading-indicator">
+                        <div class="spinner"></div>
+                        <p>Uploading images to Cloudinary...</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" id="editPcategory" placeholder="Category" class="form-control">
-                </div>
-                <button class="btn btn-success" onclick="updateProduct()" style="width: 100%;">
-                    <i class="fas fa-save"></i> Update Product
-                </button>
             </div>
+            <div class="form-group">
+                <label>Available Sizes</label>
+                <div class="size-checkbox-group" id="editSizeCheckboxGroup">
+                    <label class="size-checkbox"><input type="checkbox" value="XS"> XS</label>
+                    <label class="size-checkbox"><input type="checkbox" value="S"> S</label>
+                    <label class="size-checkbox"><input type="checkbox" value="M"> M</label>
+                    <label class="size-checkbox"><input type="checkbox" value="L"> L</label>
+                    <label class="size-checkbox"><input type="checkbox" value="XL"> XL</label>
+                    <label class="size-checkbox"><input type="checkbox" value="XXL"> XXL</label>
+                </div>
+                <div class="selected-sizes" id="editSelectedSizesDisplay"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" id="editPcategory" placeholder="Category" class="form-control">
+            </div>
+            <button class="btn btn-success" onclick="updateProductWithImages()" style="width: 100%;">
+                <i class="fas fa-save"></i> Update Product
+            </button>
         </div>
     </div>
+</div>
 
     <!-- Update Order Status Modal -->
     <div id="updateStatusModal" class="modal">
@@ -11379,10 +11832,18 @@ input:checked + .sell-toggle-slider {
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-links">
-                <a href="https://maps.app.goo.gl/kq5hDCceJsPGmNzE7" target="_blank"><i class="fas fa-map-pin"></i> Location</a>
-                <a href="https://whatsapp.com/channel/0029Vb7CmRj6mYPUIefNR32h" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a>
-                <a href="https://www.instagram.com/dasmeshimportsmansa?igsh=MTZrdjFscDZocjliZw" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://www.facebook.com/share/17uC1Gk42v/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://maps.app.goo.gl/kq5hDCceJsPGmNzE7" target="_blank" class="footer-link location-link">
+                    <i class="fas fa-map-pin"></i> Location
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vb7CmRj6mYPUIefNR32h" target="_blank" class="footer-link whatsapp-link">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Channel
+                </a>
+                <a href="https://www.instagram.com/dasmeshimportsmansa?igsh=MTZrdjFscDZocjliZw" target="_blank" class="footer-link instagram-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.facebook.com/share/17uC1Gk42v/" target="_blank" class="footer-link facebook-link">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
             </div>
             <div class="footer-copyright">
                 <p>© 2025 Dasmesh Imports - Premium Furniture Imports from USA, Canada & Germany</p>
@@ -11402,7 +11863,7 @@ input:checked + .sell-toggle-slider {
         let uploadProgress = {};
         
         // API URL
-        const API = "https://script.google.com/macros/s/AKfycbwi-v4Z0-yB9MDMJIPuEL0Z2-xsF2ZutPnbjG7YE-WcDV0rmJIgE0KNKH4GDRnCJK_WTA/exec";
+        const API = "https://script.google.com/macros/s/AKfycbyxcH1THxIXPSFloKPX_samYv0J5N7qKE0Yhu7Azi8Xd5hsHYypByQ-cPCdbreqhBe5Qg/exec";
         const RAZORPAY_KEY = "rzp_live_Slz1svE4IWrMih";
         
         let user = null;
@@ -14411,6 +14872,653 @@ function handleSwipe() {
             // Swipe right - previous image
             prevGalleryImage();
         }
+    }
+}
+
+// Global variables for edit product
+let editSelectedFiles = [];
+let editTempImagePreviews = [];
+let editExistingImages = [];
+
+// Handle edit product image selection
+function handleEditImageSelection(e) {
+    const files = Array.from(e.target.files);
+    const validFiles = files.filter(file => {
+        const isValidType = file.type.startsWith('image/');
+        const isValidSize = file.size <= 5 * 1024 * 1024;
+        if (!isValidType) showNotification(`${file.name} is not an image file`, 'error');
+        if (!isValidSize) showNotification(`${file.name} is too large (max 5MB)`, 'error');
+        return isValidType && isValidSize;
+    });
+
+    if (validFiles.length > 0) {
+        editSelectedFiles = [...editSelectedFiles, ...validFiles];
+        const newPreviews = validFiles.map(file => URL.createObjectURL(file));
+        editTempImagePreviews = [...editTempImagePreviews, ...newPreviews];
+        updateEditImagePreviewDisplay();
+    }
+}
+
+// Update edit image preview display
+function updateEditImagePreviewDisplay() {
+    const container = document.getElementById('editProductImagePreviews');
+    if (!container) return;
+    
+    let html = '';
+    
+    // Show existing images first
+    if (editExistingImages && editExistingImages.length > 0) {
+        editExistingImages.forEach((imgUrl, index) => {
+            html += `
+                <div class="image-url-item">
+                    <div class="image-preview-container">
+                        <img src="${imgUrl}" alt="Existing Image ${index + 1}" class="image-preview-thumb">
+                        <button type="button" class="remove-image-btn" onclick="removeExistingImage(${index})">✕</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    // Show new upload previews
+    editTempImagePreviews.forEach((preview, index) => {
+        html += `
+            <div class="image-url-item">
+                <div class="image-preview-container">
+                    <img src="${preview}" alt="Preview ${index + 1}" class="image-preview-thumb">
+                    <button type="button" class="remove-image-btn" onclick="removeEditSelectedImage(${index})">✕</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Remove existing image from product
+function removeExistingImage(index) {
+    editExistingImages.splice(index, 1);
+    updateEditImagePreviewDisplay();
+}
+
+// Remove newly selected image
+function removeEditSelectedImage(index) {
+    URL.revokeObjectURL(editTempImagePreviews[index]);
+    editSelectedFiles = editSelectedFiles.filter((_, i) => i !== index);
+    editTempImagePreviews = editTempImagePreviews.filter((_, i) => i !== index);
+    updateEditImagePreviewDisplay();
+}
+
+// Upload new images for edit
+async function uploadEditImages() {
+    if (editSelectedFiles.length === 0) return [];
+    const uploadProgressContainer = document.getElementById('editUploadProgressContainer');
+    if (uploadProgressContainer) uploadProgressContainer.style.display = 'block';
+    const uploadedUrls = [];
+    for (let i = 0; i < editSelectedFiles.length; i++) {
+        try {
+            const url = await uploadImageToCloudinary(editSelectedFiles[i]);
+            uploadedUrls.push(url);
+        } catch (error) {
+            console.error(`Failed to upload image ${i + 1}:`, error);
+            showNotification(`Failed to upload image ${i + 1}. Please try again.`, 'error');
+        }
+    }
+    if (uploadProgressContainer) uploadProgressContainer.style.display = 'none';
+    return uploadedUrls;
+}
+
+// Reset edit image upload
+function resetEditImageUpload() {
+    editTempImagePreviews.forEach(preview => URL.revokeObjectURL(preview));
+    editSelectedFiles = [];
+    editTempImagePreviews = [];
+    const fileInput = document.getElementById('editProductImages');
+    if (fileInput) fileInput.value = '';
+    updateEditImagePreviewDisplay();
+}
+
+// Updated toggleEditModal function
+function toggleEditModal(productId = null) {
+    const modal = document.getElementById('editProductModal');
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        resetEditImageUpload();
+    } else {
+        modal.style.display = 'flex';
+        if (productId) {
+            const product = allProducts.find(p => p[0] == productId);
+            if (product) {
+                document.getElementById('editProductId').value = product[0];
+                document.getElementById('editPname').value = product[1];
+                document.getElementById('editPprice').value = product[2];
+                document.getElementById('editPdesc').value = product[3] || '';
+                document.getElementById('editPcategory').value = product[6] || '';
+                
+                // Get original price (column 10 if exists)
+                const originalPrice = product[10] || '';
+                document.getElementById('editPoriginalPrice').value = originalPrice;
+                
+                // Get stock quantity (column 11 if exists)
+                const stock = product[11] || 10;
+                document.getElementById('editPstock').value = stock;
+                
+                // Load existing images
+                try {
+                    if (product[9] && typeof product[9] === 'string') {
+                        editExistingImages = JSON.parse(product[9]);
+                    } else if (product[7] && typeof product[7] === 'string') {
+                        editExistingImages = JSON.parse(product[7]);
+                    } else {
+                        editExistingImages = product[4] ? [product[4]] : [];
+                    }
+                } catch(e) {
+                    editExistingImages = product[4] ? [product[4]] : [];
+                }
+                
+                updateEditImagePreviewDisplay();
+                
+                let sizes = ['M'];
+                try { if (product[5]) sizes = JSON.parse(product[5]); } catch(e) {}
+                setEditSizes(sizes);
+            }
+        }
+    }
+}
+
+// Updated updateProductWithImages function
+async function updateProductWithImages() {
+    const id = document.getElementById('editProductId').value;
+    const name = document.getElementById('editPname').value;
+    const price = document.getElementById('editPprice').value;
+    const originalPrice = document.getElementById('editPoriginalPrice').value;
+    const stock = document.getElementById('editPstock').value;
+    const desc = document.getElementById('editPdesc').value;
+    const category = document.getElementById('editPcategory').value;
+    const sizes = getEditSelectedSizes();
+    
+    if (!id || !name || !price) {
+        showNotification('Please fill in required fields', 'error');
+        return;
+    }
+    
+    if (sizes.length === 0) {
+        showNotification('Please select at least one size', 'error');
+        return;
+    }
+    
+    const updateBtn = document.querySelector('#editProductModal .btn-success');
+    setButtonLoading(updateBtn, true);
+    
+    try {
+        // Upload new images
+        const newImageUrls = await uploadEditImages();
+        
+        // Combine existing images with new ones
+        const allImageUrls = [...editExistingImages, ...newImageUrls];
+        
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "updateProduct",
+                id: id,
+                name: name,
+                price: Number(price),
+                originalPrice: originalPrice ? Number(originalPrice) : null,
+                stock: Number(stock) || 0,
+                description: desc,
+                imageUrls: allImageUrls,
+                sizes: sizes,
+                category: category
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Product updated successfully!', 'success');
+            toggleEditModal();
+            loadProducts();
+        } else {
+            showNotification('Error updating product', 'error');
+        }
+    } catch (error) {
+        console.error('Error updating product:', error);
+        showNotification('Error updating product', 'error');
+    } finally {
+        setButtonLoading(updateBtn, false);
+    }
+}
+
+// Updated addProductWithImages function
+async function addProductWithImages() {
+    const addBtn = document.getElementById('addProductBtn');
+    setButtonLoading(addBtn, true);
+    
+    const name = document.getElementById('pname').value;
+    const price = document.getElementById('pprice').value;
+    const originalPrice = document.getElementById('poriginalPrice').value;
+    const stock = document.getElementById('pstock').value;
+    const desc = document.getElementById('pdesc').value;
+    const category = document.getElementById('pcategory').value;
+    const sizes = getSelectedSizes();
+    
+    if (!name || !price) {
+        showNotification('Please fill in required fields', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    if (sizes.length === 0) {
+        showNotification('Please select at least one size', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    if (selectedFiles.length === 0) {
+        showNotification('Please select at least one product image', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    try {
+        const imageUrls = await uploadAllImages();
+        
+        if (imageUrls.length === 0) {
+            showNotification('Failed to upload images. Please try again.', 'error');
+            setButtonLoading(addBtn, false);
+            return;
+        }
+        
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "addProduct",
+                name: name,
+                price: Number(price),
+                originalPrice: originalPrice ? Number(originalPrice) : null,
+                stock: Number(stock) || 0,
+                description: desc,
+                imageUrls: imageUrls,
+                sizes: sizes,
+                category: category
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Product added successfully with images!', 'success');
+            
+            document.getElementById('pname').value = '';
+            document.getElementById('pprice').value = '';
+            document.getElementById('poriginalPrice').value = '';
+            document.getElementById('pstock').value = '10';
+            document.getElementById('pdesc').value = '';
+            document.getElementById('pcategory').value = '';
+            
+            document.querySelectorAll('#sizeCheckboxGroup input[type="checkbox"]').forEach(cb => {
+                cb.checked = cb.value === 'M';
+            });
+            updateSelectedSizesDisplay();
+            resetImageUpload();
+            loadProducts();
+        } else {
+            showNotification('Error adding product', 'error');
+        }
+    } catch (error) {
+        console.error('Error adding product:', error);
+        showNotification('Error adding product', 'error');
+    } finally {
+        setButtonLoading(addBtn, false);
+    }
+}
+
+// Updated createProductCardGrid2 with price display and stock check
+function createProductCardGrid2(product) {
+    let sizes = ['M'];
+    try { if (product[5]) sizes = JSON.parse(product[5]); } catch(e) {}
+    
+    let imgUrl = product[4] || '';
+    let allImages = [];
+    try {
+        if (product[9] && typeof product[9] === 'string') {
+            allImages = JSON.parse(product[9]);
+            if (allImages && allImages.length > 0) imgUrl = allImages[0];
+        } else if (product[7] && typeof product[7] === 'string') {
+            allImages = JSON.parse(product[7]);
+            if (allImages && allImages.length > 0) imgUrl = allImages[0];
+        }
+    } catch(e) {}
+    
+    const sellOnline = product[8] === true || product[8] === 'true' || product[8] === 1;
+    const originalPrice = product[10] || null;
+    const stock = product[11] || 0;
+    const isOutOfStock = stock <= 0;
+    
+    const productData = {
+        id: product[0],
+        name: product[1],
+        price: product[2],
+        originalPrice: originalPrice,
+        stock: stock,
+        desc: product[3],
+        imageUrl: imgUrl,
+        imageUrls: allImages,
+        sizes: sizes,
+        category: product[6] || '',
+        sell_online: sellOnline
+    };
+    
+    let sizeOptionsHTML = '';
+    if (productData.sizes && productData.sizes.length > 0) {
+        sizeOptionsHTML = productData.sizes.map(size => `<option value="${size}">${size}</option>`).join('');
+    } else {
+        sizeOptionsHTML = '<option value="M">M</option>';
+    }
+    
+    // Price HTML with strike-through if original price exists
+    const priceHTML = originalPrice ? `
+        <div class="product-price-wrapper">
+            <span class="product-original-price">₹${originalPrice}</span>
+            <span class="product-actual-price">₹${productData.price}</span>
+        </div>
+    ` : `<div class="product-price">₹${productData.price}</div>`;
+    
+    // Stock info
+    const stockHTML = `
+        <div class="stock-info ${isOutOfStock ? 'out-of-stock' : ''}">
+            <i class="fas fa-boxes"></i> ${isOutOfStock ? 'Out of Stock' : `${stock} units available`}
+        </div>
+    `;
+    
+    const addToCartButton = (sellOnline && !isOutOfStock) ? `
+        <div class="quantity-selector">
+            <input type="number" id="qty-${productData.id}" class="quantity-input" value="1" min="1" max="${stock}">
+            <button class="btn-add-to-cart" onclick="addToCartFromGrid2WithQuantity(${JSON.stringify(productData).replace(/"/g, '&quot;')}, this)">
+                <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+        </div>
+    ` : (sellOnline && isOutOfStock ? `
+        <button class="btn-add-to-cart" disabled style="background: #999; cursor: not-allowed;">
+            <i class="fas fa-ban"></i> Out of Stock
+        </button>
+    ` : '');
+    
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="background: #999;"><i class="fas fa-store"></i> Store Only</span>`;
+    
+    return `
+        <div class="product-card ${sellOnline ? 'selling-product' : ''}" data-selling="${sellOnline}">
+            <div class="product-img" style="${imgUrl ? `background-image: url('${imgUrl}')` : 'background-color: #f5efe6;'}" 
+                 onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">
+                ${productData.category ? `<span class="product-category">${productData.category}</span>` : ''}
+                ${sellBadge}
+                ${!imgUrl ? `<i class="fas fa-box product-img-placeholder"></i>` : ''}
+            </div>
+            <div class="product-info">
+                <h3 class="product-name" onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">${productData.name}</h3>
+                <p class="product-desc">${productData.desc || 'No description available'}</p>
+                ${priceHTML}
+                ${stockHTML}
+                <div class="size-selector">
+                    <select id="size-${productData.id}" class="size-input">${sizeOptionsHTML}</select>
+                </div>
+                ${addToCartButton}
+            </div>
+        </div>
+    `;
+}
+
+// Updated add to cart with quantity
+function addToCartFromGrid2WithQuantity(productData, btn) {
+    if (!user) { toggleAuthModal(); return; }
+    
+    let product;
+    if (typeof productData === 'string') { 
+        try { product = JSON.parse(productData); } catch(e) { return; }
+    } else { product = productData; }
+    
+    const sizeSelect = btn.parentElement.parentElement.querySelector('.size-input');
+    const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+    const quantityInput = btn.parentElement.querySelector('.quantity-input');
+    const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+    
+    // Check stock limit
+    if (quantity > product.stock) {
+        showNotification(`Only ${product.stock} units available in stock!`, 'warning');
+        return;
+    }
+    
+    const existingIndex = cartItems.findIndex(item => item.id === product.id && item.size === selectedSize);
+    const newTotalQty = existingIndex !== -1 ? (cartItems[existingIndex].quantity || 1) + quantity : quantity;
+    
+    if (newTotalQty > product.stock) {
+        showNotification(`Cannot add ${quantity} more. Only ${product.stock - (cartItems[existingIndex]?.quantity || 0)} units available!`, 'warning');
+        return;
+    }
+    
+    if (existingIndex !== -1) {
+        cartItems[existingIndex].quantity = newTotalQty;
+        showNotification(`${product.name} quantity updated to ${newTotalQty}!`, 'success');
+    } else {
+        cartItems.push({ ...product, size: selectedSize, quantity: quantity });
+        showNotification(`${product.name} added to cart!`, 'success');
+    }
+    
+    updateCartCount();
+    saveCartToStorage();
+}
+// Setup edit product file input
+const editFileInput = document.getElementById('editProductImages');
+if (editFileInput) {
+    editFileInput.addEventListener('change', handleEditImageSelection);
+}
+
+// Updated addToCartFromGrid2WithQuantity function with proper stock check
+function addToCartFromGrid2WithQuantity(productData, btn) {
+    if (!user) { toggleAuthModal(); return; }
+    
+    let product;
+    if (typeof productData === 'string') { 
+        try { product = JSON.parse(productData); } catch(e) { return; }
+    } else { product = productData; }
+    
+    const sizeSelect = btn.parentElement.parentElement.querySelector('.size-input');
+    const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+    const quantityInput = btn.parentElement.querySelector('.quantity-input');
+    let quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+    
+    // Validate quantity
+    if (isNaN(quantity) || quantity < 1) {
+        quantity = 1;
+        if (quantityInput) quantityInput.value = 1;
+    }
+    
+    // Check if product has stock property
+    const availableStock = product.stock || 0;
+    
+    if (availableStock <= 0) {
+        showNotification(`${product.name} is out of stock!`, 'error');
+        return;
+    }
+    
+    if (quantity > availableStock) {
+        showNotification(`Only ${availableStock} units available in stock!`, 'warning');
+        if (quantityInput) quantityInput.value = availableStock;
+        return;
+    }
+    
+    const existingIndex = cartItems.findIndex(item => item.id === product.id && item.size === selectedSize);
+    const currentQtyInCart = existingIndex !== -1 ? (cartItems[existingIndex].quantity || 0) : 0;
+    const newTotalQty = currentQtyInCart + quantity;
+    
+    if (newTotalQty > availableStock) {
+        const maxAddable = availableStock - currentQtyInCart;
+        showNotification(`You already have ${currentQtyInCart} in cart. Can only add ${maxAddable} more!`, 'warning');
+        if (quantityInput) quantityInput.value = maxAddable > 0 ? maxAddable : 0;
+        return;
+    }
+    
+    if (existingIndex !== -1) {
+        cartItems[existingIndex].quantity = newTotalQty;
+        showNotification(`${product.name} quantity updated to ${newTotalQty}!`, 'success');
+    } else {
+        cartItems.push({ ...product, size: selectedSize, quantity: quantity });
+        showNotification(`${product.name} added to cart!`, 'success');
+    }
+    
+    updateCartCount();
+    saveCartToStorage();
+}
+
+// Updated renderCart function to show stock info
+function renderCart() {
+    const container = document.getElementById('cartContent');
+    if (!cartItems || cartItems.length === 0) {
+        container.innerHTML = `
+            <div class="cart-container" style="text-align: center; padding: 3rem;">
+                <i class="fas fa-shopping-cart" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3>Your cart is empty</h3>
+                <p>Add some products to your cart</p>
+                <button class="btn btn-primary" onclick="showPage('products')"><i class="fas fa-store"></i> Continue Shopping</button>
+            </div>
+        `;
+        updateCartCount();
+        return;
+    }
+    
+    let subtotal = 0;
+    let itemsHTML = '';
+    let stockIssues = false;
+    
+    for (let index = 0; index < cartItems.length; index++) {
+        const item = cartItems[index];
+        const availableStock = item.stock || 0;
+        const itemTotal = Number(item.price) * (item.quantity || 1);
+        subtotal += itemTotal;
+        
+        // Check if quantity exceeds stock
+        const exceedsStock = (item.quantity || 1) > availableStock;
+        if (exceedsStock) stockIssues = true;
+        
+        itemsHTML += `
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-box\"></i>'">` : '<i class="fas fa-box"></i>'}
+                </div>
+                <div class="cart-item-info">
+                    <h4 class="cart-item-name">${item.name}</h4>
+                    ${item.desc ? `<p class="cart-item-desc">${item.desc.substring(0, 60)}${item.desc.length > 60 ? '...' : ''}</p>` : ''}
+                    <div><span class="size-badge">Size: ${item.size || 'M'}</span></div>
+                    ${exceedsStock ? `<div class="stock-info out-of-stock" style="margin-top: 5px;"><i class="fas fa-exclamation-triangle"></i> Only ${availableStock} units available! Please reduce quantity.</div>` : ''}
+                </div>
+                <div class="cart-item-actions">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <button class="btn btn-secondary" style="padding: 6px 12px; color: black;" onclick="window.updateCartQuantity(${index}, -1)">
+                            <i class="fas fa-minus" style="color: black;"></i>
+                        </button>
+                        <span style="min-width: 40px; text-align: center; font-weight: 600;">${item.quantity || 1}</span>
+                        <button class="btn btn-secondary" style="padding: 6px 12px; color: black;" onclick="window.updateCartQuantity(${index}, 1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <span class="cart-item-price">₹${itemTotal.toFixed(2)}</span>
+                    <button class="btn btn-danger" onclick="window.removeCartItem(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    window.originalSubtotal = subtotal;
+    container.innerHTML = `
+        <div class="cart-container">
+            <h3 style="margin-bottom: 1.5rem;">Cart Items (${cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0)} items)</h3>
+            ${itemsHTML}
+            <div class="cart-total">
+                <h3>Subtotal: <span class="total-amount">₹${subtotal.toFixed(2)}</span></h3>
+                ${stockIssues ? `<div class="stock-info out-of-stock" style="margin: 10px 0; padding: 10px; background: #fee; border-radius: 8px;">
+                    <i class="fas fa-exclamation-triangle"></i> Some items exceed available stock. Please adjust quantities before proceeding.
+                </div>` : ''}
+                <div style="margin-top: 1rem;">
+                    <button class="btn btn-primary" onclick="showCheckoutForm()" ${stockIssues ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                        <i class="fas fa-lock"></i> Proceed to Checkout
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearCart()" style="color: black;">
+                        <i class="fas fa-trash"></i> Clear Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    updateCartCount();
+}
+
+// Updated updateCartQuantity function with stock check
+window.updateCartQuantity = function(index, change) {
+    if (cartItems[index]) {
+        const newQuantity = (cartItems[index].quantity || 1) + change;
+        const availableStock = cartItems[index].stock || 0;
+        
+        if (newQuantity >= 1 && newQuantity <= availableStock) {
+            cartItems[index].quantity = newQuantity;
+            renderCart();
+            saveCartToStorage();
+            showNotification(`${cartItems[index].name} quantity updated to ${newQuantity}`, 'info');
+        } else if (newQuantity > availableStock) {
+            showNotification(`Only ${availableStock} units available in stock!`, 'warning');
+        } else if (newQuantity === 0) {
+            if (confirm(`Remove ${cartItems[index].name} from cart?`)) {
+                cartItems.splice(index, 1);
+                renderCart();
+                saveCartToStorage();
+                showNotification('Item removed from cart', 'warning');
+            }
+        }
+    }
+};
+
+// Updated checkout function to validate stock before placing order
+async function checkout() {
+    if (cartItems.length === 0) { showNotification('Your cart is empty!', 'error'); return; }
+    
+    // Validate stock before checkout
+    for (const item of cartItems) {
+        const availableStock = item.stock || 0;
+        const requestedQty = item.quantity || 1;
+        
+        if (requestedQty > availableStock) {
+            showNotification(`${item.name}: Only ${availableStock} units available. Please reduce quantity.`, 'error');
+            renderCart(); // Refresh cart to show error
+            return;
+        }
+    }
+    
+    const checkoutBtn = document.querySelector('#shippingForm .btn-primary');
+    const name = document.getElementById('shipName')?.value;
+    const phone = document.getElementById('shipPhone')?.value;
+    const address = document.getElementById('shipAddress')?.value;
+    const city = document.getElementById('shipCity')?.value;
+    const state = document.getElementById('shipState')?.value;
+    const pincode = document.getElementById('shipPincode')?.value;
+    
+    if (!name || !phone || !address || !city || !state || !pincode) {
+        showNotification('Please fill in all shipping details', 'error');
+        return;
+    }
+    
+    const selectedPayment = document.querySelector('.payment-option.selected p')?.textContent;
+    const paymentMethod = selectedPayment?.includes('Online') ? 'ONLINE' : 'COD';
+    const fullAddress = `${address}, ${city}, ${state} - ${pincode}`;
+    const discountData = window.appliedDiscount;
+    
+    setButtonLoading(checkoutBtn, true);
+    
+    if (paymentMethod === 'COD') {
+        await processCOD({name, phone, address: fullAddress}, discountData, checkoutBtn);
+    } else {
+        await processOnlinePayment({name, phone, address: fullAddress}, discountData, checkoutBtn);
     }
 }
     </script>
