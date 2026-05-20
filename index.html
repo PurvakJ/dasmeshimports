@@ -19922,7 +19922,196 @@ function resetMarqueeForm() {
         document.getElementById('marqueePreview').style.display = 'none';
     }
 }
+// ==================== AUTHENTICATION FUNCTIONS ====================
+// Make sure these functions are globally accessible
 
+function toggleAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (!modal) return;
+    
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'flex';
+        switchAuthTab('login');
+    }
+}
+
+function switchAuthTab(tab) {
+    const loginTab = document.querySelector('.auth-tab:first-child');
+    const signupTab = document.querySelector('.auth-tab:last-child');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    
+    if (!loginTab || !signupTab || !loginForm || !signupForm) return;
+    
+    if (tab === 'login') {
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+    } else {
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+    }
+}
+
+async function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const loginBtn = document.querySelector('#loginForm .btn-primary');
+    
+    if (!email || !password) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    setButtonLoading(loginBtn, true);
+    
+    try {
+        const res = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({ action: "login", email: email, password: password })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+            window.user = email;
+            window.role = data.role || 'user';
+            localStorage.setItem('user', window.user);
+            localStorage.setItem('role', window.role);
+            updateAuthUI();
+            toggleAuthModal();
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            showNotification("Login successful!", 'success');
+            showPage('products');
+        } else {
+            showNotification("Invalid email or password", 'error');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showNotification("Login failed. Please try again.", 'error');
+    } finally {
+        setButtonLoading(loginBtn, false);
+    }
+}
+
+async function signup() {
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    const signupBtn = document.querySelector('#signupForm .btn-primary');
+    
+    if (!email || !password) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        showNotification('Passwords do not match', 'error');
+        return;
+    }
+    
+    setButtonLoading(signupBtn, true);
+    
+    try {
+        const res = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({ action: "signup", email: email, password: password, name: "" })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+            showNotification("Account created successfully! Please login.", 'success');
+            switchAuthTab('login');
+            document.getElementById('email').value = email;
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('signupConfirmPassword').value = '';
+        } else {
+            showNotification(data.error || "Error creating account", 'error');
+        }
+    } catch (error) {
+        console.error('Signup error:', error);
+        showNotification("Error creating account", 'error');
+    } finally {
+        setButtonLoading(signupBtn, false);
+    }
+}
+
+function logout() {
+    window.user = null;
+    window.role = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('role');
+    localStorage.removeItem('cart');
+    window.cartItems = [];
+    updateCartCount();
+    updateAuthUI();
+    showPage('home');
+    showNotification("Logged out successfully!", 'info');
+}
+
+// ==================== FIXED EVENT LISTENERS (Run on page load) ====================
+document.addEventListener('DOMContentLoaded', function() {
+    // ... your existing DOMContentLoaded code ...
+    
+    // Fix: Re-attach auth button event listeners to ensure they work
+    const authBtn = document.getElementById('authBtn');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    
+    if (authBtn) {
+        // Remove any existing listeners by cloning and replacing
+        const newAuthBtn = authBtn.cloneNode(true);
+        authBtn.parentNode.replaceChild(newAuthBtn, authBtn);
+        newAuthBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (window.user) {
+                logout();
+            } else {
+                toggleAuthModal();
+            }
+            closeMobileMenu();
+        });
+    }
+    
+    if (mobileAuthBtn) {
+        const newMobileAuthBtn = mobileAuthBtn.cloneNode(true);
+        mobileAuthBtn.parentNode.replaceChild(newMobileAuthBtn, mobileAuthBtn);
+        newMobileAuthBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (window.user) {
+                logout();
+                closeMobileMenu();
+            } else {
+                toggleAuthModal();
+                closeMobileMenu();
+            }
+        });
+    }
+    
+    // Fix: Close modal when clicking outside
+    const modal = document.getElementById('authModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+    
+    // Fix: Close button in modal
+    const closeModalBtn = document.querySelector('#authModal .close-modal');
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+            const modal = document.getElementById('authModal');
+            if (modal) modal.style.display = 'none';
+        });
+    }
+});
 </script>
 
 </body>
