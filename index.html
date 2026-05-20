@@ -14143,7 +14143,7 @@ input:checked + .sell-toggle-slider {
         
         // API URL
         const API = "https://script.google.com/macros/s/AKfycbylzhZDmQxQ8p42rUgdRTOz_ssi_iqKN-JYkKDT3QrrqXU6jdS8LR51L6ACuFHG_oQfnA/exec";
-        const RAZORPAY_KEY = "rzp_live_Slz1svE4IWrMih";
+        const RAZORPAY_KEY = "rzp_live_SrdecaJQwJqqMV";
         
         let user = null;
         let role = null;
@@ -18540,6 +18540,746 @@ document.addEventListener('keydown', function(e) {
         }
     }
 });
+
+// Updated toggleEditModal function - Fix loading on subsequent edits
+function toggleEditModal(productId = null) {
+    const modal = document.getElementById('editProductModal');
+    // Reset any loading state on buttons when closing
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        resetEditImageUpload();
+        // Reset any stuck loading buttons
+        const updateBtn = document.querySelector('#editProductModal .btn-success');
+        if (updateBtn && updateBtn.classList.contains('loading')) {
+            setButtonLoading(updateBtn, false);
+        }
+    } else {
+        modal.style.display = 'flex';
+        // Reset loading button state when opening new product
+        const updateBtn = document.querySelector('#editProductModal .btn-success');
+        if (updateBtn) {
+            updateBtn.classList.remove('loading');
+            updateBtn.disabled = false;
+            updateBtn.innerHTML = '<i class="fas fa-save"></i> Update Product';
+        }
+        if (productId) {
+            const product = allProducts.find(p => p[0] == productId);
+            if (product) {
+                document.getElementById('editProductId').value = product[0];
+                document.getElementById('editPname').value = product[1];
+                document.getElementById('editPprice').value = product[2];
+                document.getElementById('editPdesc').value = product[3] || '';
+                document.getElementById('editPcategory').value = product[6] || '';
+                
+                const originalPrice = product[10] || '';
+                document.getElementById('editPoriginalPrice').value = originalPrice;
+                
+                const stock = product[11] || 10;
+                document.getElementById('editPstock').value = stock;
+                
+                try {
+                    if (product[9] && typeof product[9] === 'string') {
+                        editExistingImages = JSON.parse(product[9]);
+                    } else if (product[7] && typeof product[7] === 'string') {
+                        editExistingImages = JSON.parse(product[7]);
+                    } else {
+                        editExistingImages = product[4] ? [product[4]] : [];
+                    }
+                } catch(e) {
+                    editExistingImages = product[4] ? [product[4]] : [];
+                }
+                
+                updateEditImagePreviewDisplay();
+                
+                let sizes = ['M'];
+                try { if (product[5]) sizes = JSON.parse(product[5]); } catch(e) {}
+                setEditSizes(sizes);
+            }
+        }
+    }
+}
+
+// Updated updateProductWithImages function - Fix loading state
+async function updateProductWithImages() {
+    const id = document.getElementById('editProductId').value;
+    const name = document.getElementById('editPname').value;
+    const price = document.getElementById('editPprice').value;
+    const originalPrice = document.getElementById('editPoriginalPrice').value;
+    const stock = document.getElementById('editPstock').value;
+    const desc = document.getElementById('editPdesc').value;
+    const category = document.getElementById('editPcategory').value;
+    const sizes = getEditSelectedSizes();
+    
+    if (!id || !name || !price) {
+        showNotification('Please fill in required fields', 'error');
+        return;
+    }
+    
+    if (sizes.length === 0) {
+        showNotification('Please select at least one size', 'error');
+        return;
+    }
+    
+    const updateBtn = document.querySelector('#editProductModal .btn-success');
+    setButtonLoading(updateBtn, true);
+    
+    try {
+        const newImageUrls = await uploadEditImages();
+        const allImageUrls = [...editExistingImages, ...newImageUrls];
+        
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "updateProduct",
+                id: id,
+                name: name,
+                price: Number(price),
+                originalPrice: originalPrice ? Number(originalPrice) : null,
+                stock: Number(stock) || 0,
+                description: desc,
+                imageUrls: allImageUrls,
+                sizes: sizes,
+                category: category
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Product updated successfully!', 'success');
+            toggleEditModal();
+            loadProducts();
+        } else {
+            showNotification('Error updating product', 'error');
+        }
+    } catch (error) {
+        console.error('Error updating product:', error);
+        showNotification('Error updating product', 'error');
+    } finally {
+        setButtonLoading(updateBtn, false);
+    }
+}
+
+// Updated createProductCardGrid2 - Show Out of Stock status properly
+function createProductCardGrid2(product) {
+    let sizes = ['M'];
+    try { if (product[5]) sizes = JSON.parse(product[5]); } catch(e) {}
+    
+    let imgUrl = product[4] || '';
+    let allImages = [];
+    try {
+        if (product[9] && typeof product[9] === 'string') {
+            allImages = JSON.parse(product[9]);
+            if (allImages && allImages.length > 0) imgUrl = allImages[0];
+        } else if (product[7] && typeof product[7] === 'string') {
+            allImages = JSON.parse(product[7]);
+            if (allImages && allImages.length > 0) imgUrl = allImages[0];
+        }
+    } catch(e) {}
+    
+    const sellOnline = product[8] === true || product[8] === 'true' || product[8] === 1;
+    const originalPrice = product[10] || null;
+    const stock = product[11] || 0;
+    const isOutOfStock = stock <= 0;
+    
+    const productData = {
+        id: product[0],
+        name: product[1],
+        price: product[2],
+        originalPrice: originalPrice,
+        stock: stock,
+        desc: product[3],
+        imageUrl: imgUrl,
+        imageUrls: allImages,
+        sizes: sizes,
+        category: product[6] || '',
+        sell_online: sellOnline
+    };
+    
+    let sizeOptionsHTML = '';
+    if (productData.sizes && productData.sizes.length > 0) {
+        sizeOptionsHTML = productData.sizes.map(size => `<option value="${size}">${size}</option>`).join('');
+    } else {
+        sizeOptionsHTML = '<option value="M">M</option>';
+    }
+    
+    // Price HTML with strike-through if original price exists
+    const priceHTML = originalPrice ? `
+        <div class="product-price-wrapper">
+            <span class="product-original-price">₹${originalPrice}</span>
+            <span class="product-actual-price">₹${productData.price}</span>
+        </div>
+    ` : `<div class="product-price">₹${productData.price}</div>`;
+    
+    // Stock info - Show Out of Stock badge prominently
+    const stockHTML = `
+        <div class="stock-info ${isOutOfStock ? 'out-of-stock' : ''}">
+            <i class="fas ${isOutOfStock ? 'fa-ban' : 'fa-boxes'}"></i> 
+            ${isOutOfStock ? 'OUT OF STOCK' : `${stock} units available`}
+        </div>
+    `;
+    
+    // For online products, only show Add to Cart if in stock
+    let addToCartButton = '';
+    if (sellOnline) {
+        if (!isOutOfStock) {
+            addToCartButton = `
+                <div class="quantity-selector">
+                    <input type="number" id="qty-${productData.id}" class="quantity-input" value="1" min="1" max="${stock}">
+                    <button class="btn-add-to-cart" onclick="addToCartFromGrid2WithQuantity(${JSON.stringify(productData).replace(/"/g, '&quot;')}, this)">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            `;
+        } else {
+            addToCartButton = `
+                <button class="btn-add-to-cart out-of-stock-btn" disabled style="background: #666; cursor: not-allowed; opacity: 0.7;">
+                    <i class="fas fa-ban"></i> Out of Stock
+                </button>
+            `;
+        }
+    }
+    
+    // Sell badge
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="background: #999;"><i class="fas fa-store"></i> Store Only</span>`;
+    
+    // Add out of stock badge on image if needed
+    const outOfStockBadge = isOutOfStock ? 
+        `<span class="out-of-stock-badge" style="position: absolute; top: 10px; right: 10px; background: #c62828; color: white; padding: 4px 10px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; z-index: 2;">Out of Stock</span>` : '';
+    
+    return `
+        <div class="product-card ${sellOnline ? 'selling-product' : ''} ${isOutOfStock ? 'out-of-stock-product' : ''}" data-selling="${sellOnline}">
+            <div class="product-img" style="${imgUrl ? `background-image: url('${imgUrl}')` : 'background-color: #f5efe6;'}" 
+                 onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">
+                ${productData.category ? `<span class="product-category">${productData.category}</span>` : ''}
+                ${sellBadge}
+                ${outOfStockBadge}
+                ${!imgUrl ? `<i class="fas fa-box product-img-placeholder"></i>` : ''}
+            </div>
+            <div class="product-info">
+                <h3 class="product-name" onclick="openFullScreenProduct(${JSON.stringify(productData).replace(/"/g, '&quot;')})">${productData.name}</h3>
+                <p class="product-desc">${productData.desc || 'No description available'}</p>
+                ${priceHTML}
+                ${stockHTML}
+                <div class="size-selector">
+                    <select id="size-${productData.id}" class="size-input" ${isOutOfStock ? 'disabled' : ''}>
+                        ${sizeOptionsHTML}
+                    </select>
+                </div>
+                ${addToCartButton}
+            </div>
+        </div>
+    `;
+}
+
+// Updated addToCartFromGrid2WithQuantity - Prevent adding when out of stock
+function addToCartFromGrid2WithQuantity(productData, btn) {
+    if (!user) { toggleAuthModal(); return; }
+    
+    let product;
+    if (typeof productData === 'string') { 
+        try { product = JSON.parse(productData); } catch(e) { return; }
+    } else { product = productData; }
+    
+    // Check if product is out of stock
+    const availableStock = product.stock || 0;
+    if (availableStock <= 0) {
+        showNotification(`${product.name} is out of stock!`, 'error');
+        return;
+    }
+    
+    const sizeSelect = btn.parentElement.parentElement.querySelector('.size-input');
+    const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+    const quantityInput = btn.parentElement.querySelector('.quantity-input');
+    let quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+    
+    // Validate quantity
+    if (isNaN(quantity) || quantity < 1) {
+        quantity = 1;
+        if (quantityInput) quantityInput.value = 1;
+    }
+    
+    if (quantity > availableStock) {
+        showNotification(`Only ${availableStock} units available in stock!`, 'warning');
+        if (quantityInput) quantityInput.value = availableStock;
+        return;
+    }
+    
+    const existingIndex = cartItems.findIndex(item => item.id === product.id && item.size === selectedSize);
+    const currentQtyInCart = existingIndex !== -1 ? (cartItems[existingIndex].quantity || 0) : 0;
+    const newTotalQty = currentQtyInCart + quantity;
+    
+    if (newTotalQty > availableStock) {
+        const maxAddable = availableStock - currentQtyInCart;
+        showNotification(`You already have ${currentQtyInCart} in cart. Can only add ${maxAddable} more!`, 'warning');
+        if (quantityInput) quantityInput.value = maxAddable > 0 ? maxAddable : 0;
+        return;
+    }
+    
+    if (existingIndex !== -1) {
+        cartItems[existingIndex].quantity = newTotalQty;
+        showNotification(`${product.name} quantity updated to ${newTotalQty}!`, 'success');
+    } else {
+        cartItems.push({ ...product, size: selectedSize, quantity: quantity });
+        showNotification(`${product.name} added to cart!`, 'success');
+    }
+    
+    updateCartCount();
+    saveCartToStorage();
+}
+
+// Updated openFullScreenProduct - Show correct out of stock state
+function openFullScreenProduct(productData) {
+    let product = typeof productData === 'string' ? JSON.parse(productData) : productData;
+    
+    const sellOnline = product.sell_online === true || product.sell_online === 'true' || product.sell_online === 1;
+    const isOutOfStock = (product.stock || 0) <= 0;
+    
+    let availableSizes = ['M'];
+    try { 
+        if (product.sizes) availableSizes = typeof product.sizes === 'string' ? JSON.parse(product.sizes) : product.sizes; 
+    } catch(e) {}
+    
+    let sizeButtonsHTML = availableSizes.map(size => `<button class="size-btn" onclick="selectFullScreenSize(this, '${size}')" ${isOutOfStock ? 'disabled' : ''}>${size}</button>`).join('');
+    
+    const modal = document.getElementById('fullScreenProductModal');
+    const content = document.getElementById('fullScreenProductContent');
+    
+    // Get all images
+    let allImages = [];
+    if (product.imageUrls && product.imageUrls.length > 0) {
+        allImages = product.imageUrls;
+    } else if (product.imageUrl) {
+        allImages = [product.imageUrl];
+    }
+    
+    // Store globally for navigation
+    window.currentGalleryImages = allImages;
+    window.currentImageIndex = 0;
+    
+    // Create gallery HTML with arrows
+    let galleryHTML = '';
+    if (allImages.length > 0) {
+        const arrowsHTML = allImages.length > 1 ? `
+            <button class="gallery-nav-arrow prev" onclick="prevGalleryImage()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav-arrow next" onclick="nextGalleryImage()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="gallery-image-counter" id="galleryImageCounter">
+                1 / ${allImages.length}
+            </div>
+        ` : '';
+        
+        galleryHTML = `
+            <div class="full-screen-gallery">
+                <div class="gallery-main-image">
+                    <img id="galleryMainImage" src="${allImages[0]}" alt="${product.name}">
+                    ${arrowsHTML}
+                </div>
+                <div class="gallery-thumbnails">
+                    ${allImages.map((img, idx) => `
+                        <div class="gallery-thumb ${idx === 0 ? 'active' : ''}" onclick="changeGalleryImage(${idx}, '${img}')">
+                            <img src="${img}" alt="Thumb ${idx + 1}">
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        galleryHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%;"><i class="fas fa-box" style="font-size: 5rem; color: var(--primary); opacity: 0.3;"></i></div>`;
+    }
+    
+    // Price HTML
+    let priceHTML = '';
+    if (product.originalPrice && product.originalPrice > 0) {
+        priceHTML = `
+            <div class="full-screen-price-wrapper">
+                <span class="full-screen-original-price">₹${product.originalPrice}</span>
+                <span class="full-screen-actual-price">₹${product.price}</span>
+            </div>
+        `;
+    } else {
+        priceHTML = `<div class="full-screen-price">₹${product.price}</div>`;
+    }
+    
+    const stock = product.stock || 0;
+    const stockHTML = `
+        <div class="stock-info ${isOutOfStock ? 'out-of-stock' : ''}" style="margin: 0.5rem 0; text-align: center;">
+            <i class="fas ${isOutOfStock ? 'fa-ban' : 'fa-boxes'}"></i> 
+            ${isOutOfStock ? 'OUT OF STOCK' : `${stock} units available`}
+        </div>
+    `;
+    
+    // Only show Add to Cart if in stock
+    const addToCartButton = (sellOnline && !isOutOfStock) ? 
+        `<button class="btn btn-primary" onclick="addToCartFromFullScreen()"><i class="fas fa-cart-plus"></i> Add to Cart</button>` : 
+        `<button class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;"><i class="fas fa-ban"></i> ${sellOnline ? 'Out of Stock' : 'Store Only'}</button>`;
+    
+    const sellBadge = sellOnline ? 
+        `<span class="sell-badge" style="background: #2e7d32;"><i class="fas fa-globe"></i> Available Online</span>` : 
+        `<span class="sell-badge" style="background: #999;"><i class="fas fa-store"></i> Store Pickup Only</span>`;
+    
+    content.innerHTML = `
+        <div class="full-screen-product">
+            <div class="full-screen-image">
+                ${galleryHTML}
+            </div>
+            <div class="full-screen-details">
+                ${sellBadge}
+                ${isOutOfStock ? `<span class="out-of-stock-badge" style="display: inline-block; margin: 0 auto 1rem auto; background: #c62828; color: white; padding: 4px 12px;">OUT OF STOCK</span>` : ''}
+                ${product.category ? `<div class="full-screen-category">${product.category}</div>` : ''}
+                <h2>${product.name}</h2>
+                ${priceHTML}
+                ${stockHTML}
+                <div class="full-screen-description">${product.desc || 'No description available for this product.'}</div>
+                <div class="full-screen-sizes">
+                    <h3><i class="fas fa-tshirt"></i> Select Size</h3>
+                    <div class="size-buttons" id="fullScreenSizeButtons">${sizeButtonsHTML}</div>
+                </div>
+                <div class="full-screen-static-info">
+                    <div class="info-row">
+                        <i class="fas fa-truck"></i>
+                        <strong>Delivery</strong>
+                        <span class="info-content">4-10 business days <span class="delivery-badge">Pan India</span></span>
+                    </div>
+                    <div class="info-row">
+                        <i class="fas fa-exchange-alt"></i>
+                        <strong>Return Policy</strong>
+                        <span class="info-content no-return">No return/exchange available</span>
+                    </div>
+                    <div class="info-row">
+                        <i class="fas fa-headset"></i>
+                        <strong>Support</strong>
+                        <span class="info-content"><strong class="assistance-phone">📱 91941-91940</strong> | ☎️ 01652 291946</span>
+                    </div>
+                    <div class="info-row">
+                        <i class="fas fa-gavel"></i>
+                        <strong>Jurisdiction</strong>
+                        <span class="info-content">Subject to Mansa Jurisdiction</span>
+                    </div>
+                </div>
+                <div class="full-screen-actions">
+                    ${addToCartButton}
+                    <button class="btn btn-secondary" onclick="closeFullScreenProduct()">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    window.currentFullScreenProduct = product;
+    window.currentFullScreenSize = availableSizes[0] || 'M';
+    window.currentFullScreenSellOnline = sellOnline;
+    window.currentFullScreenStock = stock;
+    
+    setTimeout(() => { 
+        const firstSizeBtn = document.querySelector('#fullScreenSizeButtons .size-btn'); 
+        if (firstSizeBtn && !isOutOfStock) firstSizeBtn.classList.add('selected'); 
+    }, 100);
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Add this function to force refresh product data from server
+async function refreshProductsData() {
+    try {
+        const res = await fetch(API, { method: "POST", body: JSON.stringify({ action: "getProducts" }) });
+        const data = await res.json();
+        if (data.success) {
+            allProducts = data.data || [];
+            // Re-render all product displays
+            renderFeaturedProducts();
+            renderAllProductsGrid2();
+            updateAdminProducts();
+            renderAdminAllProducts();
+            updateCategoryDropdownForProductType();
+            updateProductTypeCounts();
+        }
+    } catch (error) {
+        console.error('Error refreshing products:', error);
+    }
+}
+
+// Updated loadProducts function
+async function loadProducts() {
+    try {
+        const res = await fetch(API, { method: "POST", body: JSON.stringify({ action: "getProducts" }) });
+        const data = await res.json();
+        allProducts = data.success ? (data.data || []) : [];
+        
+        // Ensure all products have stock property (default to 0 if missing)
+        allProducts = allProducts.map(product => {
+            if (product[11] === undefined || product[11] === null) {
+                product[11] = 0;
+            }
+            return product;
+        });
+        
+        renderFeaturedProducts();
+        renderAllProductsGrid2();
+        populateCategoryDropdown();
+        updateAdminProducts();
+        renderAdminAllProducts();
+        updateCategoryFilter();
+        updateProductTypeCounts();
+        updateCategoryDropdownForProductType();
+    } catch (error) {
+        console.error('Error loading products:', error);
+        allProducts = [];
+    }
+}
+
+// Updated renderFeaturedProducts
+function renderFeaturedProducts() {
+    const container = document.getElementById('featuredProducts');
+    if (!container) return;
+    // Get first 8 products (or all if less than 8)
+    const featured = allProducts.slice(0, 8);
+    if (featured.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--gray);">No products available</p>';
+        return;
+    }
+    container.innerHTML = featured.map(product => createProductCardGrid2(product)).join('');
+}
+// Updated addProductWithImages - ensure stock is set correctly
+async function addProductWithImages() {
+    const addBtn = document.getElementById('addProductBtn');
+    setButtonLoading(addBtn, true);
+    
+    const name = document.getElementById('pname').value;
+    const price = document.getElementById('pprice').value;
+    const originalPrice = document.getElementById('poriginalPrice').value;
+    const stock = document.getElementById('pstock').value;
+    const desc = document.getElementById('pdesc').value;
+    const category = document.getElementById('pcategory').value;
+    const sizes = getSelectedSizes();
+    
+    if (!name || !price) {
+        showNotification('Please fill in required fields', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    if (sizes.length === 0) {
+        showNotification('Please select at least one size', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    if (selectedFiles.length === 0) {
+        showNotification('Please select at least one product image', 'error');
+        setButtonLoading(addBtn, false);
+        return;
+    }
+    
+    try {
+        const imageUrls = await uploadAllImages();
+        
+        if (imageUrls.length === 0) {
+            showNotification('Failed to upload images. Please try again.', 'error');
+            setButtonLoading(addBtn, false);
+            return;
+        }
+        
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "addProduct",
+                name: name,
+                price: Number(price),
+                originalPrice: originalPrice ? Number(originalPrice) : null,
+                stock: Number(stock) || 0,
+                description: desc,
+                imageUrls: imageUrls,
+                sizes: sizes,
+                category: category
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Product added successfully with images!', 'success');
+            
+            document.getElementById('pname').value = '';
+            document.getElementById('pprice').value = '';
+            document.getElementById('poriginalPrice').value = '';
+            document.getElementById('pstock').value = '10';
+            document.getElementById('pdesc').value = '';
+            document.getElementById('pcategory').value = '';
+            
+            document.querySelectorAll('#sizeCheckboxGroup input[type="checkbox"]').forEach(cb => {
+                cb.checked = cb.value === 'M';
+            });
+            updateSelectedSizesDisplay();
+            resetImageUpload();
+            
+            // Refresh products data
+            await refreshProductsData();
+        } else {
+            showNotification('Error adding product', 'error');
+        }
+    } catch (error) {
+        console.error('Error adding product:', error);
+        showNotification('Error adding product', 'error');
+    } finally {
+        setButtonLoading(addBtn, false);
+    }
+}
+
+// Updated updateProductWithImages - Refresh after update
+async function updateProductWithImages() {
+    const id = document.getElementById('editProductId').value;
+    const name = document.getElementById('editPname').value;
+    const price = document.getElementById('editPprice').value;
+    const originalPrice = document.getElementById('editPoriginalPrice').value;
+    const stock = document.getElementById('editPstock').value;
+    const desc = document.getElementById('editPdesc').value;
+    const category = document.getElementById('editPcategory').value;
+    const sizes = getEditSelectedSizes();
+    
+    if (!id || !name || !price) {
+        showNotification('Please fill in required fields', 'error');
+        return;
+    }
+    
+    if (sizes.length === 0) {
+        showNotification('Please select at least one size', 'error');
+        return;
+    }
+    
+    const updateBtn = document.querySelector('#editProductModal .btn-success');
+    setButtonLoading(updateBtn, true);
+    
+    try {
+        const newImageUrls = await uploadEditImages();
+        const allImageUrls = [...editExistingImages, ...newImageUrls];
+        
+        const response = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({
+                action: "updateProduct",
+                id: id,
+                name: name,
+                price: Number(price),
+                originalPrice: originalPrice ? Number(originalPrice) : null,
+                stock: Number(stock) || 0,
+                description: desc,
+                imageUrls: allImageUrls,
+                sizes: sizes,
+                category: category
+            })
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('Product updated successfully!', 'success');
+            toggleEditModal();
+            // Refresh products data after update
+            await refreshProductsData();
+        } else {
+            showNotification('Error updating product', 'error');
+        }
+    } catch (error) {
+        console.error('Error updating product:', error);
+        showNotification('Error updating product', 'error');
+    } finally {
+        setButtonLoading(updateBtn, false);
+    }
+}
+
+
+// Update the DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuth();
+    loadProducts();
+    initCarousel();
+    setupFileInput();
+    hideAllSizeElements();
+    
+    document.querySelectorAll('#sizeCheckboxGroup input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateSelectedSizesDisplay));
+    document.querySelectorAll('#editSizeCheckboxGroup input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateEditSelectedSizesDisplay));
+    document.addEventListener('keypress', function(e) { if (e.target.id === 'discountCode' && e.key === 'Enter') applyDiscountCode(); });
+    
+    // Navigation initialization
+    document.getElementById('hamburgerBtn').addEventListener('click', toggleMobileMenu);
+    document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); showPage(btn.getAttribute('data-page')); }));
+    document.getElementById('authBtn').addEventListener('click', () => { if (user) logout(); else toggleAuthModal(); closeMobileMenu(); });
+    document.getElementById('mobileAuthBtn').addEventListener('click', () => { if (user) logout(); else { toggleAuthModal(); closeMobileMenu(); } closeMobileMenu(); });
+    
+    // Refresh products data periodically (every 30 seconds) to keep stock info updated
+    setInterval(() => {
+        if (document.visibilityState === 'visible') {
+            refreshProductsData();
+        }
+    }, 30000);
+    
+    // Refresh when page becomes visible again
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            refreshProductsData();
+        }
+    });
+});
+
+
+// Update the processCOD and processOnlinePayment functions to refresh products after order
+async function processCOD(shippingDetails, discountData, checkoutBtn) {
+    try {
+        const response = await fetch(API, { method: "POST", body: JSON.stringify({
+            action: "checkout", email: user, cart: cartItems, subtotal: window.originalSubtotal,
+            discount_code: discountData ? discountData.code : null, discount_percent: discountData ? discountData.percent : null,
+            name: shippingDetails.name, phone: shippingDetails.phone, address: shippingDetails.address, payment: "COD"
+        })});
+        const data = await response.json();
+        if (data.success) {
+            showNotification(`Order #${data.orderId} placed successfully with Cash on Delivery!`, 'success');
+            if (data.discountAmount > 0) showNotification(`Discount applied: ₹${data.discountAmount.toFixed(2)} saved!`, 'success');
+            cartItems = []; window.appliedDiscount = null; saveCartToStorage(); updateCartCount();
+            loadUserOrders(); showPage('ordersPage');
+            // Refresh products to update stock
+            await refreshProductsData();
+        } else showNotification('Error placing order', 'error');
+    } catch (error) { console.error('Error placing order:', error); showNotification('Error placing order', 'error');
+    } finally { if (checkoutBtn) setButtonLoading(checkoutBtn, false); }
+}
+
+async function processOnlinePayment(shippingDetails, discountData, checkoutBtn) {
+    const finalTotal = discountData ? window.originalSubtotal - discountData.amount : window.originalSubtotal;
+    var rzp = new Razorpay({
+        key: RAZORPAY_KEY, amount: finalTotal * 100, currency: "INR", name: "Dasmesh Import",
+        description: `Order Payment${discountData ? ` (Discount: ${discountData.percent}% off)` : ''}`,
+        handler: async function (res) {
+            try {
+                const response = await fetch(API, { method: "POST", body: JSON.stringify({
+                    action: "checkout", email: user, cart: cartItems, subtotal: window.originalSubtotal,
+                    discount_code: discountData ? discountData.code : null, discount_percent: discountData ? discountData.percent : null,
+                    name: shippingDetails.name, phone: shippingDetails.phone, address: shippingDetails.address,
+                    payment: "ONLINE", paymentId: res.razorpay_payment_id
+                })});
+                const data = await response.json();
+                if (data.success) {
+                    showNotification(`Payment Successful! Order #${data.orderId}`, 'success');
+                    if (data.discountAmount > 0) showNotification(`Discount applied: ₹${data.discountAmount.toFixed(2)} saved!`, 'success');
+                    cartItems = []; window.appliedDiscount = null; saveCartToStorage(); updateCartCount();
+                    loadUserOrders(); showPage('ordersPage');
+                    // Refresh products to update stock
+                    await refreshProductsData();
+                } else showNotification('Error saving order', 'error');
+            } catch (error) { showNotification('Error saving order', 'error');
+            } finally { if (checkoutBtn) setButtonLoading(checkoutBtn, false); }
+        },
+        prefill: { email: user, contact: shippingDetails.phone, name: shippingDetails.name },
+        theme: { color: "#6366f1" },
+        modal: { ondismiss: function() { showNotification('Payment cancelled', 'warning'); if (checkoutBtn) setButtonLoading(checkoutBtn, false); } }
+    });
+    rzp.open();
+}
+
 </script>
 
 </body>
