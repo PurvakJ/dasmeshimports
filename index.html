@@ -19923,6 +19923,250 @@ function resetMarqueeForm() {
     }
 }
 
+
+// Updated toggleAuthModal function - Make sure modal is displayed
+function toggleAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (!modal) return;
+    
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'flex';
+        switchAuthTab('login');
+        // Clear any previous error messages
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('signupEmail').value = '';
+        document.getElementById('signupPassword').value = '';
+        document.getElementById('signupConfirmPassword').value = '';
+    }
+}
+
+// Updated login function
+async function login() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    
+    if (!email || !password) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    const loginBtn = document.querySelector('#loginForm .btn-primary');
+    setButtonLoading(loginBtn, true);
+    
+    try {
+        const res = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({ action: "login", email: email, password: password })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+            user = email;
+            role = data.role || 'user';
+            localStorage.setItem('user', user);
+            localStorage.setItem('role', role);
+            updateAuthUI();
+            toggleAuthModal();
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            showNotification("Login successful! Welcome back!", 'success');
+            showPage('products');
+        } else {
+            showNotification(data.error || "Invalid email or password", 'error');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showNotification("Login failed. Please check your connection and try again.", 'error');
+    } finally {
+        setButtonLoading(loginBtn, false);
+    }
+}
+
+// Updated signup function
+async function signup() {
+    const email = document.getElementById('signupEmail').value.trim();
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    
+    if (!email || !password) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        showNotification('Passwords do not match', 'error');
+        return;
+    }
+    
+    if (password.length < 6) {
+        showNotification('Password must be at least 6 characters long', 'error');
+        return;
+    }
+    
+    const signupBtn = document.querySelector('#signupForm .btn-primary');
+    setButtonLoading(signupBtn, true);
+    
+    try {
+        const res = await fetch(API, {
+            method: "POST",
+            body: JSON.stringify({ action: "signup", email: email, password: password, name: "" })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+            showNotification("Account created successfully! Please login.", 'success');
+            switchAuthTab('login');
+            document.getElementById('email').value = email;
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('signupConfirmPassword').value = '';
+        } else {
+            showNotification(data.error || "Error creating account. Email might already exist.", 'error');
+        }
+    } catch (error) {
+        console.error('Signup error:', error);
+        showNotification("Error creating account. Please try again.", 'error');
+    } finally {
+        setButtonLoading(signupBtn, false);
+    }
+}
+
+// Also add this function if not present (to ensure auth buttons work)
+function ensureAuthButtons() {
+    const authBtn = document.getElementById('authBtn');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    
+    if (authBtn) {
+        if (user) {
+            authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+            authBtn.onclick = function() { logout(); };
+        } else {
+            authBtn.innerHTML = '<i class="fas fa-user"></i> Login';
+            authBtn.onclick = function() { toggleAuthModal(); };
+        }
+    }
+    
+    if (mobileAuthBtn) {
+        if (user) {
+            mobileAuthBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+            mobileAuthBtn.onclick = function() { logout(); closeMobileMenu(); };
+        } else {
+            mobileAuthBtn.innerHTML = '<i class="fas fa-user"></i> Login';
+            mobileAuthBtn.onclick = function() { toggleAuthModal(); closeMobileMenu(); };
+        }
+    }
+}
+
+// Add this inside DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    
+    // Ensure auth button handlers are properly set
+    const authBtn = document.getElementById('authBtn');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    
+    if (authBtn) {
+        authBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (user) {
+                logout();
+            } else {
+                toggleAuthModal();
+            }
+        });
+    }
+    
+    if (mobileAuthBtn) {
+        mobileAuthBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (user) {
+                logout();
+                closeMobileMenu();
+            } else {
+                toggleAuthModal();
+                closeMobileMenu();
+            }
+        });
+    }
+});
+
+function updateAuthUI() {
+    const userInfo = document.getElementById('userInfo');
+    const mobileUserInfo = document.getElementById('mobileUserInfo');
+    const authBtn = document.getElementById('authBtn');
+    const ordersBtn = document.getElementById('ordersBtn');
+    const adminBtn = document.getElementById('adminBtn');
+    const mobileAuthBtn = document.getElementById('mobileAuthBtn');
+    const mobileOrdersBtn = document.getElementById('mobileOrdersBtn');
+    const mobileAdminBtn = document.getElementById('mobileAdminBtn');
+    const mobileUserEmail = document.getElementById('mobileUserEmail');
+    const mobileUserRole = document.getElementById('mobileUserRole');
+    const changePasswordBtn = document.getElementById('changePasswordBtn');
+    const mobileChangePasswordBtn = document.getElementById('mobileChangePasswordBtn');
+
+    if (user) {
+        userInfo.style.display = 'none';
+        mobileUserInfo.style.display = 'block';
+        mobileUserEmail.textContent = user;
+        mobileUserRole.textContent = role === 'admin' ? 'Admin' : 'User';
+        
+        if (authBtn) {
+            authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+            authBtn.onclick = function() { logout(); };
+        }
+        
+        if (ordersBtn) ordersBtn.style.display = 'flex';
+        
+        if (mobileAuthBtn) {
+            mobileAuthBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+            mobileAuthBtn.onclick = function() { logout(); closeMobileMenu(); };
+        }
+        
+        if (mobileOrdersBtn) mobileOrdersBtn.style.display = 'flex';
+        
+        if (changePasswordBtn) {
+            changePasswordBtn.style.display = 'flex';
+            changePasswordBtn.onclick = function() { toggleChangePasswordModal(); };
+        }
+        
+        if (mobileChangePasswordBtn) {
+            mobileChangePasswordBtn.style.display = 'flex';
+            mobileChangePasswordBtn.onclick = function() { toggleChangePasswordModal(); closeMobileMenu(); };
+        }
+        
+        if (role === 'admin') {
+            if (adminBtn) adminBtn.style.display = 'flex';
+            if (mobileAdminBtn) mobileAdminBtn.style.display = 'flex';
+        } else {
+            if (adminBtn) adminBtn.style.display = 'none';
+            if (mobileAdminBtn) mobileAdminBtn.style.display = 'none';
+        }
+    } else {
+        userInfo.style.display = 'none';
+        mobileUserInfo.style.display = 'none';
+        
+        if (authBtn) {
+            authBtn.innerHTML = '<i class="fas fa-user"></i> Login';
+            authBtn.onclick = function() { toggleAuthModal(); };
+        }
+        
+        if (ordersBtn) ordersBtn.style.display = 'none';
+        
+        if (mobileAuthBtn) {
+            mobileAuthBtn.innerHTML = '<i class="fas fa-user"></i> Login';
+            mobileAuthBtn.onclick = function() { toggleAuthModal(); closeMobileMenu(); };
+        }
+        
+        if (mobileOrdersBtn) mobileOrdersBtn.style.display = 'none';
+        if (mobileAdminBtn) mobileAdminBtn.style.display = 'none';
+        if (adminBtn) adminBtn.style.display = 'none';
+        if (changePasswordBtn) changePasswordBtn.style.display = 'none';
+        if (mobileChangePasswordBtn) mobileChangePasswordBtn.style.display = 'none';
+    }
+}
 </script>
 
 </body>
